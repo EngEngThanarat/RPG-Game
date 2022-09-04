@@ -1,0 +1,89 @@
+package main;
+
+import java.awt.*;
+
+
+import javax.swing.JPanel;
+import Entity.Player;
+
+public class GamePanel extends JPanel implements Runnable{
+	//Screen Setting
+	final int originalTileSize = 16; // 16x16 Title
+	final int scale = 3;
+	
+	public final int tileSize = originalTileSize * scale;// 48x48 title
+	final int maxScreenCol = 16;
+	final int maxScreenRow = 12;
+	final int ScreenWidth = tileSize * maxScreenCol;// 768 pixels
+	final int ScreenHigh = tileSize * maxScreenRow;// 576 pixels
+
+	// FPS
+	int FPS = 60;
+
+	KeyHandler keyH = new KeyHandler();
+	Thread gameThread; // a thread is a small set of instructions designed to be scheduled
+	Player player = new Player(this,keyH);
+
+	// set player default positions
+	int playerX = 100;
+	int playerY = 100;
+	int playerSpeed = 4;
+	
+	public GamePanel() {
+		this.setPreferredSize(new Dimension(ScreenWidth, ScreenHigh));
+		this.setBackground(Color.black);
+		this.setDoubleBuffered(true); // if set True,all you drawing from component will be done in buffer
+		this.addKeyListener(keyH); // call KeyHandler class
+		this.setFocusable(true);
+	}
+
+	public void startGameThread() {
+		gameThread = new Thread(this);
+		gameThread.start();
+	}
+	
+	@Override
+	public void run(){
+		double drawInteval = 1000000000/FPS; // 16666666.66
+		double delta = 0;
+		long lastTime = System.nanoTime();
+		long currentTime;
+		long timer = 0;
+		int drawCount = 0;
+
+		while(gameThread != null){
+			currentTime = System.nanoTime();
+			delta += (currentTime - lastTime)/drawInteval;
+			timer += (currentTime - lastTime);
+			lastTime = currentTime;
+
+			if(delta >= 1){
+				update();
+				repaint();
+				delta--; // reset delta
+				drawCount++;
+			}
+
+			// show FPS
+			if(timer >= 1000000000){
+				System.out.println("FPS:"+drawCount);
+				drawCount = 0;
+				timer = 0;
+			}
+		}
+	}
+		
+	public void update() {
+		player.update();
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Graphics2D g2 =(Graphics2D)g;
+
+		player.draw(g2);
+
+		g2.dispose();
+	}
+}
