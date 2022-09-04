@@ -29,18 +29,18 @@ public class Player extends Entity{
 
     public void getPlayerImage(){
         try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_up1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_up2.png"));
-            up3 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_up3.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_down1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_down2.png"));
-            down3 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_down3.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_left1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_left2.png"));
-            left3 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_left3.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_right1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_right2.png"));
-            right3 = ImageIO.read(getClass().getResourceAsStream("/Player2/charecter_right3.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/Player/char_up1.png"));
+            up2 = ImageIO.read(getClass().getResourceAsStream("/Player/char_up2.png"));
+            up3 = ImageIO.read(getClass().getResourceAsStream("/Player/char_up3.png"));
+            down1 = ImageIO.read(getClass().getResourceAsStream("/Player/char_down1.png"));
+            down2 = ImageIO.read(getClass().getResourceAsStream("/Player/char_down2.png"));
+            down3 = ImageIO.read(getClass().getResourceAsStream("/Player/char_down3.png"));
+            left1 = ImageIO.read(getClass().getResourceAsStream("/Player/char_left1.png"));
+            left2 = ImageIO.read(getClass().getResourceAsStream("/Player/char_left2.png"));
+            left3 = ImageIO.read(getClass().getResourceAsStream("/Player/char_left3.png"));
+            right1 = ImageIO.read(getClass().getResourceAsStream("/Player/char_right1.png"));
+            right2 = ImageIO.read(getClass().getResourceAsStream("/Player/char_right2.png"));
+            right3 = ImageIO.read(getClass().getResourceAsStream("/Player/char_right3.png"));
         }catch(IOException e){
             e.printStackTrace();
         }
