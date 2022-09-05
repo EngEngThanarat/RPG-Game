@@ -9,7 +9,7 @@ public class Main {
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close when you click X
 		window.setVisible(false);
-		window.setTitle("2D Advanture");
+		window.setTitle("2D RPG Advanture");
 
 		GamePanel gamePanel = new GamePanel();
 		window.add(gamePanel);
@@ -22,5 +22,4 @@ public class Main {
 
 		gamePanel.startGameThread();
 	}
-
 }
