@@ -4,6 +4,7 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 import Entity.Player;
+import Objects.SuperObject;
 import Tiles.TileManager;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -30,7 +31,9 @@ public class GamePanel extends JPanel implements Runnable {
 	KeyHandler keyH = new KeyHandler();
 	Thread gameThread; // a thread is a small set of instructions designed to be scheduled
 	public CollisionChecker checker = new CollisionChecker(this);
+	public AssetSetter setter = new AssetSetter(this);
 	public Player player = new Player(this, keyH);
+	public SuperObject obj[] = new SuperObject[10];
 
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(ScreenWidth, ScreenHigh));
@@ -38,6 +41,10 @@ public class GamePanel extends JPanel implements Runnable {
 		this.setDoubleBuffered(true); // if set True,all you drawing from component will be done in buffer
 		this.addKeyListener(keyH); // call KeyHandler class
 		this.setFocusable(true);
+	}
+
+	public void setupGame(){
+		setter.setObject();
 	}
 
 	public void startGameThread() {
@@ -83,11 +90,19 @@ public class GamePanel extends JPanel implements Runnable {
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
-
 		Graphics2D g2 = (Graphics2D) g;
 
+		// Tile
 		tileM.draw(g2);
 
+		// Object
+		for(int i = 0; i < obj.length; i++){
+			if(obj[i] != null){
+				obj[i].draw(g2, this);
+			}
+		}
+
+		// Player
 		player.draw(g2);
 
 		g2.dispose();
