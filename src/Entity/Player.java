@@ -45,15 +45,27 @@ public class Player extends Entity {
 			up1 = ImageIO.read(getClass().getResourceAsStream("/Player/char_up1.png"));
 			up2 = ImageIO.read(getClass().getResourceAsStream("/Player/char_up2.png"));
 			up3 = ImageIO.read(getClass().getResourceAsStream("/Player/char_up3.png"));
+			up4 = ImageIO.read(getClass().getResourceAsStream("/Player/char_up4.png"));
+			up5 = ImageIO.read(getClass().getResourceAsStream("/Player/char_up5.png"));
+			up6 = ImageIO.read(getClass().getResourceAsStream("/Player/char_up6.png"));
 			down1 = ImageIO.read(getClass().getResourceAsStream("/Player/char_down1.png"));
 			down2 = ImageIO.read(getClass().getResourceAsStream("/Player/char_down2.png"));
 			down3 = ImageIO.read(getClass().getResourceAsStream("/Player/char_down3.png"));
+			down4 = ImageIO.read(getClass().getResourceAsStream("/Player/char_down4.png"));
+			down5 = ImageIO.read(getClass().getResourceAsStream("/Player/char_down5.png"));
+			down6 = ImageIO.read(getClass().getResourceAsStream("/Player/char_down6.png"));
 			left1 = ImageIO.read(getClass().getResourceAsStream("/Player/char_left1.png"));
 			left2 = ImageIO.read(getClass().getResourceAsStream("/Player/char_left2.png"));
 			left3 = ImageIO.read(getClass().getResourceAsStream("/Player/char_left3.png"));
+			left4 = ImageIO.read(getClass().getResourceAsStream("/Player/char_left4.png"));
+			left5 = ImageIO.read(getClass().getResourceAsStream("/Player/char_left5.png"));
+			left6 = ImageIO.read(getClass().getResourceAsStream("/Player/char_left6.png"));
 			right1 = ImageIO.read(getClass().getResourceAsStream("/Player/char_right1.png"));
 			right2 = ImageIO.read(getClass().getResourceAsStream("/Player/char_right2.png"));
 			right3 = ImageIO.read(getClass().getResourceAsStream("/Player/char_right3.png"));
+			right4 = ImageIO.read(getClass().getResourceAsStream("/Player/char_right4.png"));
+			right5 = ImageIO.read(getClass().getResourceAsStream("/Player/char_right5.png"));
+			right6 = ImageIO.read(getClass().getResourceAsStream("/Player/char_right6.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -101,6 +113,12 @@ public class Player extends Entity {
 				} else if (spriteNum == 2) {
 					spriteNum = 3;
 				} else if (spriteNum == 3) {
+					spriteNum = 4;
+				}else if (spriteNum == 4) {
+					spriteNum = 5;
+				}else if (spriteNum == 5) {
+					spriteNum = 6;
+				}else if (spriteNum == 6) {
 					spriteNum = 1;
 				}
 				spriteCounter = 0;
@@ -122,6 +140,15 @@ public class Player extends Entity {
 			if (spriteNum == 3) {
 				image = up3;
 			}
+			if (spriteNum == 4) {
+				image = up4;
+			}
+			if (spriteNum == 5) {
+				image = up5;
+			}
+			if (spriteNum == 6) {
+				image = up6;
+			}
 			break;
 		case "down":
 			if (spriteNum == 1) {
@@ -132,6 +159,15 @@ public class Player extends Entity {
 			}
 			if (spriteNum == 3) {
 				image = down3;
+			}
+			if (spriteNum == 4) {
+				image = down4;
+			}
+			if (spriteNum == 5) {
+				image = down5;
+			}
+			if (spriteNum == 6) {
+				image = down6;
 			}
 			break;
 		case "left":
@@ -144,6 +180,15 @@ public class Player extends Entity {
 			if (spriteNum == 3) {
 				image = left3;
 			}
+			if (spriteNum == 4) {
+				image = left4;
+			}
+			if (spriteNum == 5) {
+				image = left5;
+			}
+			if (spriteNum == 6) {
+				image = left6;
+			}
 			break;
 		case "right":
 			if (spriteNum == 1) {
@@ -154,6 +199,15 @@ public class Player extends Entity {
 			}
 			if (spriteNum == 3) {
 				image = right3;
+			}
+			if (spriteNum == 4) {
+				image = right4;
+			}
+			if (spriteNum == 5) {
+				image = right5;
+			}
+			if (spriteNum == 6) {
+				image = right6;
 			}
 			break;
 		}
