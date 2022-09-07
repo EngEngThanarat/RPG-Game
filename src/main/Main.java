@@ -15,7 +15,7 @@ public class Main {
 		window.add(gamePanel);
 
 		window.pack(); // method sizes the frame so that all its contents are at or above their
-						// preferred sizes.
+					   // preferred sizes.
 
 		window.setLocationRelativeTo(null); // Display will show on the center of the screen
 		window.setVisible(true);

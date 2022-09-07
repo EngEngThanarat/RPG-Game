@@ -27,11 +27,15 @@ public class GamePanel extends JPanel implements Runnable {
 	// FPS
 	int FPS = 60;
 
+	// System
 	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
-	Thread gameThread; // a thread is a small set of instructions designed to be scheduled
+	sound Sound =new sound();
 	public CollisionChecker checker = new CollisionChecker(this);
 	public AssetSetter setter = new AssetSetter(this);
+	Thread gameThread; // a thread is a small set of instructions designed to be scheduled
+
+	// Entity and Object
 	public Player player = new Player(this, keyH);
 	public SuperObject obj[] = new SuperObject[10];
 
@@ -45,6 +49,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void setupGame(){
 		setter.setObject();
+
+		PlayMusic(0);
 	}
 
 	public void startGameThread() {
@@ -106,5 +112,20 @@ public class GamePanel extends JPanel implements Runnable {
 		player.draw(g2);
 
 		g2.dispose();
+	}
+
+	public void PlayMusic(int i){
+		Sound.setFile(i);
+		Sound.play();
+		Sound.loop();
+	}
+
+	public void stopMusic(){
+		Sound.stop();
+	}
+
+	public void PlaySE(int i){
+		Sound.setFile(i);
+		Sound.play();
 	}
 }

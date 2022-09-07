@@ -93,10 +93,13 @@ public class TileManager {
 
 			int tileNum = mapTileNum[worldCol][worldRow];
 
-			int worldX = worldCol * gp.tileSize;
+			int worldX = worldCol * gp.tileSize; 
 			int worldY = worldRow * gp.tileSize;
+			// worldX and WorldY is positions of the Map 
+
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;
 			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+			// positions of the screen draw
 
 			if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX
 					&& worldX - gp.tileSize < gp.player.worldX + gp.player.screenX
