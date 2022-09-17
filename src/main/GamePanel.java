@@ -30,9 +30,11 @@ public class GamePanel extends JPanel implements Runnable {
 	// System
 	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
-	sound Sound =new sound();
+	sound music = new sound();
+	sound se = new sound();
 	public CollisionChecker checker = new CollisionChecker(this);
 	public AssetSetter setter = new AssetSetter(this);
+	public UI ui = new UI(this);
 	Thread gameThread; // a thread is a small set of instructions designed to be scheduled
 
 	// Entity and Object
@@ -98,6 +100,12 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 
+		// Debug
+		long drawStart = 0;
+		if(keyH.CheckDrawTime == true){
+			drawStart = System.nanoTime();
+		}
+
 		// Tile
 		tileM.draw(g2);
 
@@ -111,21 +119,32 @@ public class GamePanel extends JPanel implements Runnable {
 		// Player
 		player.draw(g2);
 
+		//UI
+		ui.draw(g2);
+
+		// DEBUG
+		if(keyH.CheckDrawTime == true){
+			long drawEnd = System.nanoTime();
+			long passed = drawEnd - drawStart;
+			g2.setColor(Color.white);
+			g2.drawString("Draw Time: "+passed, 10 , 400);
+			System.out.println("Draw Time: "+passed);
+		}
 		g2.dispose();
 	}
 
 	public void PlayMusic(int i){
-		Sound.setFile(i);
-		Sound.play();
-		Sound.loop();
+		music.setFile(i);
+		music.play();
+		music.loop();
 	}
 
 	public void stopMusic(){
-		Sound.stop();
+		music.stop();
 	}
 
 	public void PlaySE(int i){
-		Sound.setFile(i);
-		Sound.play();
+		se.setFile(i);
+		se.play();
 	}
 }
