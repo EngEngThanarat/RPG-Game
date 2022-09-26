@@ -4,11 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.io.IOException;
-import java.nio.Buffer;
-
 import javax.imageio.ImageIO;
-import javax.swing.text.Utilities;
-
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
@@ -146,6 +142,7 @@ public class Player extends Entity {
 			}
 		}
 	}
+	
 	public void pickUpObject(int i){
 		if(i != 999){
 			String objectName = gp.obj[i].name;

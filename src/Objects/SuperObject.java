@@ -2,8 +2,6 @@ package Objects;
 
 import java.awt.image.BufferedImage;
 
-import javax.swing.text.Utilities;
-
 import main.GamePanel;
 import main.UtilityTool;
 

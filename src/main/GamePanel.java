@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.*;
-
 import javax.swing.JPanel;
 import Entity.Player;
 import Objects.SuperObject;

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
 import Objects.Obj_Key;
 
 public class UI {
@@ -20,12 +19,10 @@ public class UI {
 
     public UI(GamePanel gp){
         this.gp = gp;
-
         arial_35 = new Font("Arial", Font.PLAIN,35);
         arial_80B = new Font("Arial", Font.BOLD,80);
         Obj_Key key = new Obj_Key(gp);
-        keyImage = key.getIcon(gp);;
-        
+        keyImage = key.getIcon(gp);; 
     }
 
     public void showMessage(String text){
