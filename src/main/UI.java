@@ -20,8 +20,6 @@ public class UI {
         this.gp = gp;
         arial_35 = new Font("Arial", Font.PLAIN,35);
         arial_80B = new Font("Arial", Font.BOLD,80);
-//       Obj_Key key = new Obj_Key(gp);
-//       keyImage = key.getIcon(gp);; 
     }
 
     public void showMessage(String text){
