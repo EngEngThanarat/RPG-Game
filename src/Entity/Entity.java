@@ -30,6 +30,10 @@ public class Entity {
 	String dialougues[] = new String[20];
 	int dialougeIndex = 0;
 
+	// CHARACTER STATUS
+	public int maxLife;
+	public int life;
+	
 	public Entity(GamePanel gp){
 		this.gp = gp;
 	}

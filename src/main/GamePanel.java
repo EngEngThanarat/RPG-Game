@@ -22,8 +22,8 @@ public class GamePanel extends JPanel implements Runnable {
 	// WORLD SETTINGS
 	public final int maxWorldCol = 50;
 	public final int maxWorldRow = 50;
-	public final int worldWidth = tileSize * maxWorldCol;
-	public final int worldHeight = tileSize * maxWorldRow;
+	public final int worldWidth = tileSize * maxWorldCol; // 2400
+	public final int worldHeight = tileSize * maxWorldRow; // 2400
 
 	// FPS
 	int FPS = 60;
@@ -36,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public CollisionChecker checker = new CollisionChecker(this);
 	public AssetSetter setter = new AssetSetter(this);
 	public UI ui = new UI(this);
+	public EventHandler eHandler = new EventHandler(this);
 	Thread gameThread; // a thread is a small set of instructions designed to be scheduled
 
 	// Entity and Object
@@ -130,7 +131,7 @@ public class GamePanel extends JPanel implements Runnable {
 		// TITILE SCREEN
 		if(gameState == titleState){
 			ui.draw(g2);
-			
+
 		}
 		// OTHERS
 		else{

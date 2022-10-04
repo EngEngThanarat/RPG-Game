@@ -18,8 +18,8 @@ public class Player extends Entity {
 
 		this.keyH = keyH2;
 
-		screenX = gp.ScreenWidth / 2 - (gp.tileSize / 2);
-		screenY = gp.ScreenHigh / 2 - (gp.tileSize / 2);
+		screenX = gp.ScreenWidth / 2 - (gp.tileSize / 2); // 360 pixel
+		screenY = gp.ScreenHigh / 2 - (gp.tileSize / 2); // 264 pixel
 
 		// create collision Area
 		solidArea = new Rectangle();
@@ -35,10 +35,15 @@ public class Player extends Entity {
 	}
 
 	public void setDefaultValues() {
-		worldX = gp.tileSize * 23;
-		worldY = gp.tileSize * 21;
+		worldX = gp.tileSize * 23; //1104 pixel
+		worldY = gp.tileSize * 21; //1104 pixel
 		speed = 4;
 		direction = "down";
+
+		// PLAYER STATUS
+		maxLife = 6;
+		life = maxLife;
+	
 	}
 
 	public void getPlayerImage() {
@@ -92,6 +97,11 @@ public class Player extends Entity {
 			// CHECK NPC COLLISION
 			int npcIndex = gp.checker.checkEntity(this, gp.npc);
 			interactNPC(npcIndex);
+
+			// CHECK EVENT
+			gp.eHandler.checkEvent();
+
+			gp.keyH.enterPressed = false;
 
 			// IF COLLISION IS FALSE, PLAYER CAN MOVE
 			if (collisionOn == false) {
@@ -152,7 +162,6 @@ public class Player extends Entity {
 				gp.npc[i].speak();
 			}
 		}
-		gp.keyH.enterPressed = false;
 	}
 
 	public void draw(Graphics2D g2) {
