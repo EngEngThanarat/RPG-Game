@@ -35,7 +35,9 @@ public class KeyHandler implements KeyListener{
                 }
                 if(code == KeyEvent.VK_ENTER){
                     if(gp.ui.commardNum == 0){
-                        gp.ui.titleScreenState = 1;
+                        //gp.ui.titleScreenState = 1;
+                        gp.gameState = gp.playState;
+                        gp.PlayMusic(0);
                     }
                     if(gp.ui.commardNum == 1){
                         // add later
@@ -46,40 +48,40 @@ public class KeyHandler implements KeyListener{
                 }
             }
 
-            else if(gp.ui.titleScreenState == 1){
-                if(code == KeyEvent.VK_W){
-                    gp.ui.commardNum--;
-                    if(gp.ui.commardNum < 0){
-                        gp.ui.commardNum = 3;
-                    }
-                }
-                if(code == KeyEvent.VK_S){
-                    gp.ui.commardNum++;
-                    if(gp.ui.commardNum > 3){
-                        gp.ui.commardNum = 0;
-                    }
-                }
-                if(code == KeyEvent.VK_ENTER){
-                    if(gp.ui.commardNum == 0){
-                        System.out.println("Do some fighter specific stuff");
-                        gp.gameState = gp.playState;
-                        gp.PlayMusic(0);
-                    }
-                    if(gp.ui.commardNum == 1){
-                        System.out.println("Do some thief specific stuff");
-                        gp.gameState = gp.playState;
-                        gp.PlayMusic(0);
-                    }
-                    if(gp.ui.commardNum == 2){
-                        System.out.println("Do some sorcerer specific stuff");
-                        gp.gameState = gp.playState;
-                        gp.PlayMusic(0);
-                    }
-                    if(gp.ui.commardNum == 3){
-                        gp.ui.titleScreenState = 0;
-                    }
-                }
-            }
+        //    else if(gp.ui.titleScreenState == 1){
+        //        if(code == KeyEvent.VK_W){
+        //            gp.ui.commardNum--;
+        //            if(gp.ui.commardNum < 0){
+        //                gp.ui.commardNum = 3;
+        //            }
+        //        }
+        //        if(code == KeyEvent.VK_S){
+        //            gp.ui.commardNum++;
+        //            if(gp.ui.commardNum > 3){
+        //                gp.ui.commardNum = 0;
+        //            }
+        //        }
+        //        if(code == KeyEvent.VK_ENTER){
+        //            if(gp.ui.commardNum == 0){
+        //                System.out.println("Do some fighter specific stuff");
+        //                gp.gameState = gp.playState;
+        //                gp.PlayMusic(0);
+        //            }
+        //            if(gp.ui.commardNum == 1){
+        //                System.out.println("Do some thief specific stuff");
+        //                gp.gameState = gp.playState;
+        //                gp.PlayMusic(0);
+        //            }
+        //            if(gp.ui.commardNum == 2){
+        //                System.out.println("Do some sorcerer specific stuff");
+        //                gp.gameState = gp.playState;
+        //                gp.PlayMusic(0);
+        //            }
+        //            if(gp.ui.commardNum == 3){
+        //                gp.ui.titleScreenState = 0;
+        //            }
+        //        }
+        //    }
         }
 
         // PlayState
