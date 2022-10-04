@@ -3,13 +3,17 @@ package main;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class UI {
     
     GamePanel gp;
     Graphics2D  g2;
-    Font arial_35,arial_80B;
+    Font Hormonica;
     //BufferedImage keyImage;
 
     public boolean messageOn = false;
@@ -17,11 +21,19 @@ public class UI {
     int messageCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int commardNum = 0;
+    public int titleScreenState = 0; // 0: the first Screen, 1: second Screen
 
     public UI(GamePanel gp){
         this.gp = gp;
-        arial_35 = new Font("Arial", Font.PLAIN,35);
-        arial_80B = new Font("Arial", Font.BOLD,80);
+        try {
+            InputStream is = getClass().getResourceAsStream("/font/x12y16pxMaruMonica.ttf");
+            Hormonica = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showMessage(String text){
@@ -32,9 +44,14 @@ public class UI {
     public void draw(Graphics2D g2){
         this.g2 = g2;
         
-        g2.setFont(arial_35);
+        g2.setFont(Hormonica);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2.setColor(Color.white);
 
+        // TITLE STATE
+        if(gp.gameState == gp.titleState){
+            drawTitleScreen();
+        }
         // PLAY STATE
         if(gp.gameState == gp.playState){
             // Do playState stuff later
@@ -48,6 +65,96 @@ public class UI {
         // DIALOGUE STATE
         if(gp.gameState == gp.dialogueState){
             drawDialogueScreen();
+        }
+    }
+
+    public void drawTitleScreen(){
+        if(titleScreenState == 0){
+            g2.setColor(new Color(70,120,80));
+            g2.fillRect(0, 0, gp.ScreenWidth, gp.ScreenHigh);
+
+            // TITLE NAME
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
+            String text = "RPG Adventure";
+            int x = getXforCenteredText(text);
+            int y = gp.tileSize*3;
+            // SHADOW
+            g2.setColor(Color.gray);
+            g2.drawString(text, x+5, y+5);
+            // MAIN COLOR
+            g2.setColor(Color.white);
+            g2.drawString(text, x, y);
+
+            // HERO IMAGE
+            x = gp.ScreenWidth/2 - (gp.tileSize*2)/2;
+            y = gp.tileSize*5;
+            g2.drawImage(gp.player.down1, x, y, gp.tileSize*2 , gp.tileSize*2, null);
+
+            // MENU
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD,48F));
+
+            text = "New Game";
+            x = getXforCenteredText(text);
+            y += gp.tileSize*3.5;
+            g2.drawString(text, x, y);
+            if(commardNum == 0){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "Load Game";
+            x = getXforCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commardNum == 1){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "Quit";
+            x = getXforCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commardNum == 2){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+        }
+        // Charecter Class Selection
+        else if(titleScreenState == 1){
+            g2.setColor(Color.white);
+            g2.setFont(g2.getFont().deriveFont(42f));
+
+            String text = "Select your class";
+            int x = getXforCenteredText(text);
+            int y = gp.tileSize*3;
+            g2.drawString(text, x, y);
+
+            text = "Fighter";
+            x = getXforCenteredText(text);
+            y += gp.tileSize*3;
+            g2.drawString(text, x, y);
+            if(commardNum == 0){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+            text = "Thief";
+            x = getXforCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commardNum == 1){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+            text = "Sorcerer";
+            x = getXforCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commardNum == 2){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+            text = "Back";
+            x = getXforCenteredText(text);
+            y += gp.tileSize*2;
+            g2.drawString(text, x, y);
+            if(commardNum == 3){
+                g2.drawString(">", x-gp.tileSize, y);
+            }
         }
     }
 

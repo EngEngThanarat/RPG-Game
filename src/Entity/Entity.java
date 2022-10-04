@@ -40,6 +40,7 @@ public class Entity {
 		if(dialougues[dialougeIndex] == null){
 			dialougeIndex = 0;
 		}
+		
 		gp.ui.currentDialogue = dialougues[dialougeIndex];
 		dialougeIndex++;
 
