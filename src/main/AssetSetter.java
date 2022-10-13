@@ -1,7 +1,7 @@
 package main;
 
 import Entity.NPC_OldMan;
-import Objects.Obj_Door;
+import Monster.Slime;
 
 public class AssetSetter {
     GamePanel gp;
@@ -11,13 +11,7 @@ public class AssetSetter {
     }
 
     public void setObject(){
-        gp.obj[0]= new Obj_Door(gp);
-        gp.obj[0].worldX = gp.tileSize*10;
-        gp.obj[0].worldY = gp.tileSize*12;
 
-        gp.obj[1]= new Obj_Door(gp);
-        gp.obj[1].worldX = gp.tileSize*12;
-        gp.obj[1].worldY = gp.tileSize*23;
     }
 
     public void setNPC(){
@@ -25,12 +19,22 @@ public class AssetSetter {
         gp.npc[0].worldX = gp.tileSize*21;
         gp.npc[0].worldY = gp.tileSize*21;
 
-        gp.npc[1] = new NPC_OldMan(gp);
-        gp.npc[1].worldX = gp.tileSize*12;
-        gp.npc[1].worldY = gp.tileSize*21;
+        //gp.npc[0] = new NPC_OldMan(gp);
+        //gp.npc[0].worldX = gp.tileSize*9;
+        //gp.npc[0].worldY = gp.tileSize*10;
+    }
 
-        gp.npc[2] = new NPC_OldMan(gp);
-        gp.npc[2].worldX = gp.tileSize*31;
-        gp.npc[2].worldY = gp.tileSize*21;
+    public void setMonster(){
+        gp.Monster[0] = new Slime(gp);
+        gp.Monster[0].worldX = gp.tileSize*23;
+        gp.Monster[0].worldY = gp.tileSize*36;
+
+        gp.Monster[1] = new Slime(gp);
+        gp.Monster[1].worldX = gp.tileSize*22;
+        gp.Monster[1].worldY = gp.tileSize*37;
+
+        //gp.Monster[1] = new Slime(gp);
+        //gp.Monster[1].worldX = gp.tileSize*9;
+        //gp.Monster[1].worldY = gp.tileSize*11;
     }
 }

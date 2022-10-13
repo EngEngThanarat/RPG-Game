@@ -29,9 +29,12 @@ public class Entity {
 	public int actionLockCounter = 0;
 	String dialougues[] = new String[20];
 	int dialougeIndex = 0;
+	public boolean invincible = false;
+	public int invincibleCounter = 0;
 	public BufferedImage image, image2, image3;
     public String name;
     public boolean collision = false;
+	public int type; // 0 = player, 1 = npc, 2 = monster
 
 	// CHARACTER STATUS
 	public int maxLife;
@@ -73,7 +76,17 @@ public class Entity {
 		collisionOn = false;
 		gp.checker.checkTile(this);
 		gp.checker.checkObject(this, false);
-		gp.checker.checkPlayer(this);
+		gp.checker.checkEntity(this, gp.npc);
+		gp.checker.checkEntity(this, gp.Monster);
+		boolean contactPlayer = gp.checker.checkPlayer(this);
+
+		if(this.type == 2 && contactPlayer == true){
+			if(gp.player.invincible == false){
+				// we can give damage
+				gp.player.life -= 1;
+				gp.player.invincible = true;
+			}
+		}
 
 		// IF COLLISION IS FALSE, PLAYER CAN MOVE
 		if (collisionOn == false) {
