@@ -5,5 +5,5 @@ import java.awt.Rectangle;
 public class EventRect extends Rectangle{
     
     int eventRectDefaultX, eventRectDefaultY;
-    boolean eventDone = false;
+    boolean eventDone = false; // check if this event has already happened
 }

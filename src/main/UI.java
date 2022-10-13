@@ -9,8 +9,8 @@ import java.awt.RenderingHints;
 import java.io.IOException;
 import java.io.InputStream;
 
+import Entity.Entity;
 import Objects.Obj_Heart;
-import Objects.SuperObject;
 
 import java.awt.image.BufferedImage;
 
@@ -42,7 +42,7 @@ public class UI {
         }
 
         // CREATE HUB OBJECT
-        SuperObject heart = new Obj_Heart(gp);
+        Entity heart = new Obj_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_null = heart.image3;

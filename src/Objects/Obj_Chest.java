@@ -2,22 +2,17 @@ package Objects;
 
 import javax.imageio.ImageIO;
 
+import Entity.Entity;
 import main.GamePanel;
 
-public class Obj_Chest extends SuperObject{
+public class Obj_Chest extends Entity{
         
     GamePanel gp;
 
     public Obj_Chest(GamePanel gp){
+        super(gp);
 
-        this.gp = gp;
-        
-        name = "Chest";
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/Objects/Box.png"));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        name = "Key";
+        down1= setup("/objects/Box");
     }
 }
