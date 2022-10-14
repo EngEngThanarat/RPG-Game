@@ -11,6 +11,6 @@ public class Obj_boots extends Entity{
         super(gp);
 
         name = "Key";
-        down1= setup("/objects/speed.png");
+        down1= setup("/objects/speed.png",gp.tileSize,gp.tileSize);
     }
 }

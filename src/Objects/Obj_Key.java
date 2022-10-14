@@ -11,17 +11,6 @@ public class Obj_Key extends Entity {
         super(gp);
 
         name = "Key";
-        down1= setup("/objects/Key.png");
-
+        down1= setup("/objects/Key",gp.tileSize,gp.tileSize);
     }
-
-    //public BufferedImage getIcon(GamePanel gp){
-    //    try {
-    //        image = ImageIO.read(getClass().getResourceAsStream("/Objects/Key1.png"));
-    //        uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-    //    } catch (Exception e) {
-    //        e.printStackTrace();
-    //    }
-    //    return image;
-    //}
 }

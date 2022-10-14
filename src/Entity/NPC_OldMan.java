@@ -24,30 +24,30 @@ public class NPC_OldMan extends Entity{
     }
 
     public void getImage() {
-		up1 = setup("/npc/Old_man_up1");
-		up2 = setup("/npc/Old_man_up2");
-		up3 = setup("/npc/Old_man_up3");
-		up4 = setup("/npc/Old_man_up4");
-        up5 = setup("/npc/Old_man_up5");
-        up6 = setup("/npc/Old_man_up6");
-		down1 = setup("/npc/Old_man_down1");
-		down2 = setup("/npc/Old_man_down2");
-		down3 = setup("/npc/Old_man_down3");
-		down4 = setup("/npc/Old_man_down4");
-        down5 = setup("/npc/Old_man_down5");
-        down6 = setup("/npc/Old_man_down6");
-		left1 = setup("/npc/Old_man_left1");
-		left2 = setup("/npc/Old_man_left2");
-		left3 = setup("/npc/Old_man_left3");
-		left4 = setup("/npc/Old_man_left4");
-        left5 = setup("/npc/Old_man_left5");
-        left6 = setup("/npc/Old_man_left6");
-		right1 = setup("/npc/Old_man_right1");
-		right2 = setup("/npc/Old_man_right2");
-		right3 = setup("/npc/Old_man_right3");
-		right4 = setup("/npc/Old_man_right4");
-        right5 = setup("/npc/Old_man_right5");
-		right6 = setup("/npc/Old_man_right6");
+		up1 = setup("/npc/Old_man_up1",gp.tileSize,gp.tileSize);
+		up2 = setup("/npc/Old_man_up2",gp.tileSize,gp.tileSize);
+		up3 = setup("/npc/Old_man_up3",gp.tileSize,gp.tileSize);
+		up4 = setup("/npc/Old_man_up4",gp.tileSize,gp.tileSize);
+        up5 = setup("/npc/Old_man_up5",gp.tileSize,gp.tileSize);
+        up6 = setup("/npc/Old_man_up6",gp.tileSize,gp.tileSize);
+		down1 = setup("/npc/Old_man_down1",gp.tileSize,gp.tileSize);
+		down2 = setup("/npc/Old_man_down2",gp.tileSize,gp.tileSize);
+		down3 = setup("/npc/Old_man_down3",gp.tileSize,gp.tileSize);
+		down4 = setup("/npc/Old_man_down4",gp.tileSize,gp.tileSize);
+        down5 = setup("/npc/Old_man_down5",gp.tileSize,gp.tileSize);
+        down6 = setup("/npc/Old_man_down6",gp.tileSize,gp.tileSize);
+		left1 = setup("/npc/Old_man_left1",gp.tileSize,gp.tileSize);
+		left2 = setup("/npc/Old_man_left2",gp.tileSize,gp.tileSize);
+		left3 = setup("/npc/Old_man_left3",gp.tileSize,gp.tileSize);
+		left4 = setup("/npc/Old_man_left4",gp.tileSize,gp.tileSize);
+        left5 = setup("/npc/Old_man_left5",gp.tileSize,gp.tileSize);
+        left6 = setup("/npc/Old_man_left6",gp.tileSize,gp.tileSize);
+		right1 = setup("/npc/Old_man_right1",gp.tileSize,gp.tileSize);
+		right2 = setup("/npc/Old_man_right2",gp.tileSize,gp.tileSize);
+		right3 = setup("/npc/Old_man_right3",gp.tileSize,gp.tileSize);
+		right4 = setup("/npc/Old_man_right4",gp.tileSize,gp.tileSize);
+        right5 = setup("/npc/Old_man_right5",gp.tileSize,gp.tileSize);
+		right6 = setup("/npc/Old_man_right6",gp.tileSize,gp.tileSize);
 	}
 
     public void setDialogue(){

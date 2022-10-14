@@ -1,7 +1,5 @@
 package Objects;
 
-import javax.imageio.ImageIO;
-
 import Entity.Entity;
 import main.GamePanel;
 
@@ -13,6 +11,6 @@ public class Obj_Chest extends Entity{
         super(gp);
 
         name = "Key";
-        down1= setup("/objects/Box");
+        down1= setup("/objects/Box",gp.tileSize,gp.tileSize);
     }
 }
