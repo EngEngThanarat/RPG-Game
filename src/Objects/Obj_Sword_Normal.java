@@ -10,7 +10,7 @@ public class Obj_Sword_Normal extends Entity{
         
         name = "Normal Sword";
         down1 = setup("/Objects/sword", gp.tileSize, gp.tileSize);
-        attackValue = 1;
+        attackValue = 3;
     }
     
 }

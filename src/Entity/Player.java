@@ -165,8 +165,6 @@ public class Player extends Entity {
             // CHECK EVENT
             gp.eHandler.checkEvent();
 
-            gp.keyH.enterPressed = false;
-
             // IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (collisionOn == false && keyH.enterPressed == false) {
                 switch (direction) {
@@ -218,7 +216,12 @@ public class Player extends Entity {
         if(i != 999){
             if(invincible == false){
                 gp.PlaySE(6);
-                life -= 1;	
+
+                int damage = gp.Monster[i].attack - defense;
+                if(damage < 0){
+                    damage = 0;
+                }
+                life -= damage;	
                 invincible = true;
             }
         }
@@ -228,12 +231,23 @@ public class Player extends Entity {
         if(i != 999){
             if(gp.Monster[i].invincible == false){
                 gp.PlaySE(5);
-                gp.Monster[i].life -= 1;
+
+                int damage = attack - gp.Monster[i].defense;
+                if(damage < 0){
+                    damage = 0;
+                }
+                gp.Monster[i].life -= damage;
+                gp.ui.addMessage(damage + " damage!");
+
                 gp.Monster[i].invincible = true;
                 gp.Monster[i].damageReaction();
 
                 if(gp.Monster[i].life <= 0){
                     gp.Monster[i].dying = true;
+                    gp.ui.addMessage("Killed the "+gp.Monster[i].name + "!");
+                    gp.ui.addMessage("Exp + "+gp.Monster[i].exp + "!");
+                    exp += gp.Monster[i].exp;
+                    checkLevelUp();
                 }
             }
         }
@@ -307,6 +321,22 @@ public class Player extends Entity {
             }
         }
     }
+    
+    public void checkLevelUp(){
+        if(exp >= NextLevel){
+            level++;
+            NextLevel = NextLevel*2;
+            maxLife += 2;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defense = getDefense();
+
+            gp.PlaySE(8);
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "You are level "+ level + " now!\n"+"You feel stronger!";
+        }
+    }
 
     public void draw(Graphics2D g2) {
 
@@ -316,17 +346,23 @@ public class Player extends Entity {
 
         // DEBUG
         // ATTACK AREA
-        int tempX = screenX + solidArea.x;
-        int tempY = screenY + solidArea.y;
+        int attacktempX = screenX + solidArea.x;
+        int attacktempY = screenY + solidArea.y;
         switch(direction){
-            case "up": tempY = screenY - attackArea.height;break;
-            case "down": tempY = screenY + gp.tileSize;break;
-            case "left": tempX = screenX - attackArea.width;break;
-            case "right": tempX = screenX + gp.tileSize;break;
+            case "up": attacktempY = screenY - attackArea.height;break;
+            case "down": attacktempY = screenY + gp.tileSize;break;
+            case "left": attacktempX = screenX - attackArea.width;break;
+            case "right": attacktempX = screenX + gp.tileSize;break;
         }
         g2.setColor(Color.red);
         g2.setStroke(new BasicStroke(1));
-        g2.drawRect(tempX, tempY, attackArea.width, attackArea.height);
+        g2.drawRect(attacktempX, attacktempY, attackArea.width, attackArea.height);
+
+        // SOLID AREA
+        // int solidtempX = screenX + solidArea.x;
+        // int solidtempY = screenY + solidArea.y;
+        // g2.setColor(Color.white);
+        // g2.fillRect(solidtempX, solidtempY, solidArea.width, solidArea.height);
 
         switch (direction) {
             case "up":

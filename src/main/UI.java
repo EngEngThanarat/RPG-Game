@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import Entity.Entity;
 import Objects.Obj_Heart;
@@ -23,8 +24,8 @@ public class UI {
 
     BufferedImage heart_full,heart_half,heart_null;
     public boolean messageOn = false;
-    public String message = "";
-    int messageCounter = 0;
+    ArrayList<String> message = new ArrayList<>();
+    ArrayList<Integer> messageCounter = new ArrayList<>();
     public boolean gameFinished = false;
     public String currentDialogue = "";
     public int commardNum = 0;
@@ -48,9 +49,9 @@ public class UI {
         heart_null = heart.image3;
     }
 
-    public void showMessage(String text){
-        message = text;
-        messageOn = true;
+    public void addMessage(String text){
+        message.add(text);
+        messageCounter.add(0);
     }
 
     public void draw(Graphics2D g2){
@@ -67,6 +68,7 @@ public class UI {
         // PLAY STATE
         if(gp.gameState == gp.playState){
             drawPlayerLife();
+            drawMessage();
         }
 
         // PAUSE STATE
@@ -117,6 +119,29 @@ public class UI {
         }
     }
 
+    public void drawMessage(){
+        int messageX = gp.tileSize ; 
+        int messageY = gp.tileSize * 5;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32f));
+
+        for(int i = 0; i < message.size(); i++){
+            if(message.get(i) != null){
+                g2.setColor(Color.black);
+                g2.drawString(message.get(i), messageX+2, messageY+2);
+                g2.setColor(Color.white);
+                g2.drawString(message.get(i), messageX, messageY);
+                
+                int counter = messageCounter.get(i) + 1; // messageCounter++
+                messageCounter.set(i, counter); // set the counter to the array
+                messageY += 50;
+
+                if(messageCounter.get(i) > 180){
+                    message.remove(i);
+                    messageCounter.remove(i);
+                }
+            }
+        }
+    }
     public void drawTitleScreen(){
         if(titleScreenState == 0){
             g2.setColor(new Color(70,120,80));
