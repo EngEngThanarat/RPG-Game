@@ -2,6 +2,7 @@ package Entity;
 
 import java.awt.image.BufferedImage;
 import java.awt.AlphaComposite;
+import java.awt.*;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import main.GamePanel;
@@ -31,8 +32,8 @@ public class Player extends Entity {
         solidArea.width = 32;
         solidArea.height = 32;
 
-        attackArea.width = 36;
-        attackArea.height = 108;
+        attackArea.width = 32;
+        attackArea.height = 32;
         
         setDefaultValues();
         getPlayerImage();
@@ -40,8 +41,11 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize * 23; //1104 pixel
-        worldY = gp.tileSize * 21; //1104 pixel
+        worldX = gp.tileSize * 23; //1104 pil
+        worldY = gp.tileSize * 21; //1104 pixe
+
+        //worldX = gp.tileSize * 10; //1104 pixel
+        //worldY = gp.tileSize * 12; //1104 pixel
         speed = 4;
         direction = "down";
 
@@ -195,21 +199,23 @@ public class Player extends Entity {
     private void contactMonster(int i) {
         if(i != 999){
             if(invincible == false){
+                gp.PlaySE(6);
                 life -= 1;	
                 invincible = true;
             }
-
         }
     }
 
     public void damageMonster(int i){
         if(i != 999){
             if(gp.Monster[i].invincible == false){
+                gp.PlaySE(5);
                 gp.Monster[i].life -= 1;
                 gp.Monster[i].invincible = true;
+                gp.Monster[i].damageReaction();
 
                 if(gp.Monster[i].life <= 0){
-                    gp.Monster[i] = null;
+                    gp.Monster[i].dying = true;
                 }
             }
         }
@@ -282,6 +288,7 @@ public class Player extends Entity {
             
             }
             else{
+                gp.PlaySE(7);
                 attacking = true;
             }
         }
@@ -292,6 +299,20 @@ public class Player extends Entity {
         BufferedImage image = null;
         int tempScreenX = screenX;
         int tempScreenY = screenY;
+
+        // DEBUG
+        // ATTACK AREA
+        int tempX = screenX + solidArea.x;
+        int tempY = screenY + solidArea.y;
+        switch(direction){
+            case "up": tempY = screenY - attackArea.height;break;
+            case "down": tempY = screenY + gp.tileSize;break;
+            case "left": tempX = screenX - attackArea.width;break;
+            case "right": tempX = screenX + gp.tileSize;break;
+        }
+        g2.setColor(Color.red);
+        g2.setStroke(new BasicStroke(1));
+        g2.drawRect(tempX, tempY, attackArea.width, attackArea.height);
 
         switch (direction) {
             case "up":

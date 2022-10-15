@@ -33,8 +33,24 @@ public class AssetSetter {
         gp.Monster[1].worldX = gp.tileSize*22;
         gp.Monster[1].worldY = gp.tileSize*37;
 
-        //gp.Monster[1] = new Slime(gp);
-        //gp.Monster[1].worldX = gp.tileSize*9;
-        //gp.Monster[1].worldY = gp.tileSize*11;
+        gp.Monster[2] = new Slime(gp);
+        gp.Monster[2].worldX = gp.tileSize*9;
+        gp.Monster[2].worldY = gp.tileSize*11;
+
+        gp.Monster[3] = new Slime(gp);
+        gp.Monster[3].worldX = gp.tileSize*10;
+        gp.Monster[3].worldY = gp.tileSize*8;
+
+        gp.Monster[4] = new Slime(gp);
+        gp.Monster[4].worldX = gp.tileSize*9;
+        gp.Monster[4].worldY = gp.tileSize*10;
+
+        gp.Monster[5] = new Slime(gp);
+        gp.Monster[5].worldX = gp.tileSize*10;
+        gp.Monster[5].worldY = gp.tileSize*11;
+
+        gp.Monster[6] = new Slime(gp);
+        gp.Monster[6].worldX = gp.tileSize*8;
+        gp.Monster[6].worldY = gp.tileSize*11;
     }
 }
