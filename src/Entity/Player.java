@@ -1,7 +1,10 @@
 package Entity;
 
 import java.awt.image.BufferedImage;
-import java.awt.AlphaComposite;
+
+import Objects.Obj_Shield_Wood;
+import Objects.Obj_Sword_Normal;
+
 import java.awt.*;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -14,6 +17,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    public boolean attackCanceled = false;
 
     public Player(GamePanel gp, KeyHandler keyH2) {
         super(gp); // recrive gp from entity
@@ -23,14 +27,14 @@ public class Player extends Entity {
         screenX = gp.ScreenWidth / 2 - (gp.tileSize / 2); // 360 pixel
         screenY = gp.ScreenHigh / 2 - (gp.tileSize / 2); // 264 pixel
 
-        // create collision Area
+        // create collision Area 
         solidArea = new Rectangle();
-        solidArea.x = 8;
-        solidArea.y = 16;
+        solidArea.x = 8; // distance from x 
+        solidArea.y = 16; // distance from y
+        solidArea.width = 32; // size of rectangle
+        solidArea.height = 32; // size of rectangle
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 32;
-        solidArea.height = 32;
 
         attackArea.width = 32;
         attackArea.height = 32;
@@ -44,15 +48,30 @@ public class Player extends Entity {
         worldX = gp.tileSize * 23; //1104 pil
         worldY = gp.tileSize * 21; //1104 pixe
 
-        //worldX = gp.tileSize * 10; //1104 pixel
-        //worldY = gp.tileSize * 12; //1104 pixel
         speed = 4;
         direction = "down";
 
         // PLAYER STATUS
+        level = 1;
         maxLife = 6;
         life = maxLife;
+        strength = 1; // The more strength he has, the more damage he gives.
+        dexterity = 1; // The more dexterity he has, the less damage he receives
+        exp = 0;
+        NextLevel = 5;
+        coin = 0;
+        currentWeapon = new Obj_Sword_Normal(gp);
+        currentShield = new Obj_Shield_Wood(gp);
+        attack = getAttack(); // The total attack value is decided by strength and weapon
+        defense = getDefense(); // The total defense value is decided by dexteritery and shield
+    }
 
+    public int getAttack(){
+        return attack = strength * currentWeapon.attackValue;
+    }
+
+    public int getDefense(){
+        return defense = dexterity * currentShield.defenseValue;
     }
 
     public void getPlayerImage() {
@@ -151,20 +170,19 @@ public class Player extends Entity {
             // IF COLLISION IS FALSE, PLAYER CAN MOVE
             if (collisionOn == false && keyH.enterPressed == false) {
                 switch (direction) {
-                    case "up":
-                        worldY -= speed;
-                        break;
-                    case "down":
-                        worldY += speed;
-                        break;
-                    case "left":
-                        worldX -= speed;
-                        break;
-                    case "right":
-                        worldX += speed;
-                        break;
+                    case "up": worldY -= speed; break;
+                    case "down": worldY += speed; break;
+                    case "left": worldX -= speed; break;
+                    case "right": worldX += speed; break;
                 }
             }
+
+            if(keyH.enterPressed == true && attackCanceled == false){
+                gp.PlaySE(7);
+                attacking = true;
+                spriteCounter = 0;
+            }
+            attackCanceled = false;
 
             gp.keyH.enterPressed = false;
 
@@ -172,9 +190,9 @@ public class Player extends Entity {
             if (spriteCounter > 12) {
                 if (spriteNum == 1) {
                     spriteNum = 2;
-                } else if (spriteNum == 2) {
+                }else if (spriteNum == 2) {
                     spriteNum = 3;
-                } else if (spriteNum == 3) {
+                }else if (spriteNum == 3) {
                     spriteNum = 4;
                 }else if (spriteNum == 4) {
                     spriteNum = 5;
@@ -227,13 +245,13 @@ public class Player extends Entity {
         if(spriteCounter <= 5){
             spriteNum = 1;
         }
-        if(spriteCounter > 5 && spriteCounter <= 15){
+        if(spriteCounter > 5 && spriteCounter <= 10){
             spriteNum = 2;
         }
-        if(spriteCounter > 16 && spriteCounter <= 25){
+        if(spriteCounter > 10 && spriteCounter <= 15){
             spriteNum = 3;
         }
-        if(spriteCounter > 26 && spriteCounter <= 35){
+        if(spriteCounter > 15 && spriteCounter <= 20){
             spriteNum = 4;
             
             // Save the current worldX, worldY, solidArea
@@ -261,13 +279,13 @@ public class Player extends Entity {
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;
         }
-        if(spriteCounter > 36 && spriteCounter <= 45){
+        if(spriteCounter > 20 && spriteCounter <= 25){
             spriteNum = 5;
         }
-        if(spriteCounter > 46 && spriteCounter <= 55){
+        if(spriteCounter > 25 && spriteCounter <= 30){
             spriteNum = 6;
         }
-        if(spriteCounter > 55){
+        if(spriteCounter > 30){
             spriteNum = 1;
             spriteCounter = 0;
             attacking = false;
@@ -283,13 +301,9 @@ public class Player extends Entity {
     public void interactNPC(int i){
         if(gp.keyH.enterPressed == true){
             if(i != 999){
+                attackCanceled = true;
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
-            
-            }
-            else{
-                gp.PlaySE(7);
-                attacking = true;
             }
         }
     }
@@ -396,12 +410,12 @@ public class Player extends Entity {
         }
 
         if(invincible == true){
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+            changeAlpha(g2, 0.3f);
         }
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
         // Reset alpha
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        changeAlpha(g2, 1f);
 
         // DEBUG
         // g2.setFont(new Font("Arial",Font.PLAIN, 26));

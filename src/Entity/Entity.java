@@ -11,7 +11,6 @@ import main.GamePanel;
 import main.UtilityTool;
 
 import java.awt.Rectangle;
-import java.awt.Stroke;
 
 public class Entity {
 
@@ -24,6 +23,7 @@ public class Entity {
                          attackDown1,attackDown2,attackDown3,attackDown4,attackDown5,attackDown6,
                          attackLeft1,attackLeft2,attackLeft3,attackLeft4,attackLeft5,attackLeft6,
                          attackRight1,attackRight2,attackRight3,attackRight4,attackRight5,attackRight6;
+    public BufferedImage death1,death2,death3,death4,death5,death6;
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(0,0,40,40);
     public Rectangle attackArea = new Rectangle(0,0,0,0);
@@ -56,6 +56,20 @@ public class Entity {
     public int speed;
     public int maxLife;
     public int life;
+    public int level;
+    public int strength;
+    public int dexterity;
+    public int attack;
+    public int defense;
+    public int exp;
+    public int NextLevel;
+    public int coin;
+    public Entity currentWeapon;
+    public Entity currentShield;
+
+    // ITEM ATTRIBUTE
+    public int attackValue;
+    public int defenseValue;
 
     public Entity(GamePanel gp){
         this.gp = gp;
@@ -212,7 +226,7 @@ public class Entity {
 
                 hpBarCounter++;
 
-                if(hpBarCounter > 300){
+                if(hpBarCounter > 600){
                     hpBarCounter = 0;
                     hpBarOn = false;
                 }
@@ -234,10 +248,11 @@ public class Entity {
     }
 
     public void dyingAnimation(Graphics2D g2){
+
         dyingCounter++;
 
         int i = 5;
-
+        
         if(dyingCounter <= i){changeAlpha(g2, 0f);}
         if(dyingCounter > i && dyingCounter <= i*2){changeAlpha(g2, 1f);}
         if(dyingCounter > i*2 && dyingCounter <= i*3){changeAlpha(g2, 0f);}

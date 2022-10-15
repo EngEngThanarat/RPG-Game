@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity obj[] = new Entity[10];
     public Entity npc[] = new Entity[10];
     public Entity Monster[] = new Entity[20];
+    public EventHandler event[] = new EventHandler[3];
     ArrayList<Entity> entityList = new ArrayList<>();
 
     // GAME STATE
@@ -55,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
+    public final int characterState = 4;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHigh));
@@ -194,8 +196,6 @@ public class GamePanel extends JPanel implements Runnable {
             //UI
             ui.draw(g2);
         }
-
-
 
         // DEBUG
         if(keyH.CheckDrawTime == true){
