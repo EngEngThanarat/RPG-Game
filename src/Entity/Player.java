@@ -1,7 +1,9 @@
 package Entity;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
+import Objects.Obj_Key;
 import Objects.Obj_Shield_Wood;
 import Objects.Obj_Sword_Normal;
 
@@ -18,6 +20,8 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int MaxInventorySize = 20;
 
     public Player(GamePanel gp, KeyHandler keyH2) {
         super(gp); // recrive gp from entity
@@ -36,12 +40,13 @@ public class Player extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        attackArea.width = 32;
-        attackArea.height = 32;
+        // ATTACK AREA
+
         
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItem();
     }
 
     public void setDefaultValues() {
@@ -66,7 +71,15 @@ public class Player extends Entity {
         defense = getDefense(); // The total defense value is decided by dexteritery and shield
     }
 
+    public void setItem(){
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new Obj_Key(gp));
+        inventory.add(new Obj_Key(gp));
+    }
+
     public int getAttack(){
+        attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
     }
 
@@ -102,30 +115,85 @@ public class Player extends Entity {
     }
 
     public void getPlayerAttackImage() {
-        attackUp1 = setup("/Player/char_attack_up1",gp.tileSize*2,gp.tileSize*2);
-        attackUp2 = setup("/Player/char_attack_up2",gp.tileSize*2,gp.tileSize*2);
-        attackUp3 = setup("/Player/char_attack_up3",gp.tileSize*2,gp.tileSize*2);
-        attackUp4 = setup("/Player/char_attack_up4",gp.tileSize*2,gp.tileSize*2);
-        attackUp5 = setup("/Player/char_attack_up5",gp.tileSize*2,gp.tileSize*2);
-        attackUp6 = setup("/Player/char_attack_up6",gp.tileSize*2,gp.tileSize*2);
-        attackDown1 = setup("/Player/char_attack_down1",gp.tileSize*2,gp.tileSize*2);
-        attackDown2 = setup("/Player/char_attack_down2",gp.tileSize*2,gp.tileSize*2);
-        attackDown3 = setup("/Player/char_attack_down3",gp.tileSize*2,gp.tileSize*2);
-        attackDown4 = setup("/Player/char_attack_down4",gp.tileSize*2,gp.tileSize*2);
-        attackDown5 = setup("/Player/char_attack_down5",gp.tileSize*2,gp.tileSize*2);
-        attackDown6 = setup("/Player/char_attack_down6",gp.tileSize*2,gp.tileSize*2);
-        attackLeft1 = setup("/Player/char_attack_left1",gp.tileSize*2,gp.tileSize*2);
-        attackLeft2 = setup("/Player/char_attack_left2",gp.tileSize*2,gp.tileSize*2);
-        attackLeft3 = setup("/Player/char_attack_left3",gp.tileSize*2,gp.tileSize*2);
-        attackLeft4 = setup("/Player/char_attack_left4",gp.tileSize*2,gp.tileSize*2);
-        attackLeft5 = setup("/Player/char_attack_left5",gp.tileSize*2,gp.tileSize*2);
-        attackLeft6 = setup("/Player/char_attack_left6",gp.tileSize*2,gp.tileSize*2);
-        attackRight1 = setup("/Player/char_attack_right1",gp.tileSize*2,gp.tileSize*2);
-        attackRight2 = setup("/Player/char_attack_right2",gp.tileSize*2,gp.tileSize*2);
-        attackRight3 = setup("/Player/char_attack_right3",gp.tileSize*2,gp.tileSize*2);
-        attackRight4 = setup("/Player/char_attack_right4",gp.tileSize*2,gp.tileSize*2);
-        attackRight5 = setup("/Player/char_attack_right5",gp.tileSize*2,gp.tileSize*2);
-        attackRight6 = setup("/Player/char_attack_right6",gp.tileSize*2,gp.tileSize*2);
+        if(currentWeapon.type == type_sword){
+            attackUp1 = setup("/Player/char_attack_up1",gp.tileSize*2,gp.tileSize*2);
+            attackUp2 = setup("/Player/char_attack_up2",gp.tileSize*2,gp.tileSize*2);
+            attackUp3 = setup("/Player/char_attack_up3",gp.tileSize*2,gp.tileSize*2);
+            attackUp4 = setup("/Player/char_attack_up4",gp.tileSize*2,gp.tileSize*2);
+            attackUp5 = setup("/Player/char_attack_up5",gp.tileSize*2,gp.tileSize*2);
+            attackUp6 = setup("/Player/char_attack_up6",gp.tileSize*2,gp.tileSize*2);
+            attackDown1 = setup("/Player/char_attack_down1",gp.tileSize*2,gp.tileSize*2);
+            attackDown2 = setup("/Player/char_attack_down2",gp.tileSize*2,gp.tileSize*2);
+            attackDown3 = setup("/Player/char_attack_down3",gp.tileSize*2,gp.tileSize*2);
+            attackDown4 = setup("/Player/char_attack_down4",gp.tileSize*2,gp.tileSize*2);
+            attackDown5 = setup("/Player/char_attack_down5",gp.tileSize*2,gp.tileSize*2);
+            attackDown6 = setup("/Player/char_attack_down6",gp.tileSize*2,gp.tileSize*2);
+            attackLeft1 = setup("/Player/char_attack_left1",gp.tileSize*2,gp.tileSize*2);
+            attackLeft2 = setup("/Player/char_attack_left2",gp.tileSize*2,gp.tileSize*2);
+            attackLeft3 = setup("/Player/char_attack_left3",gp.tileSize*2,gp.tileSize*2);
+            attackLeft4 = setup("/Player/char_attack_left4",gp.tileSize*2,gp.tileSize*2);
+            attackLeft5 = setup("/Player/char_attack_left5",gp.tileSize*2,gp.tileSize*2);
+            attackLeft6 = setup("/Player/char_attack_left6",gp.tileSize*2,gp.tileSize*2);
+            attackRight1 = setup("/Player/char_attack_right1",gp.tileSize*2,gp.tileSize*2);
+            attackRight2 = setup("/Player/char_attack_right2",gp.tileSize*2,gp.tileSize*2);
+            attackRight3 = setup("/Player/char_attack_right3",gp.tileSize*2,gp.tileSize*2);
+            attackRight4 = setup("/Player/char_attack_right4",gp.tileSize*2,gp.tileSize*2);
+            attackRight5 = setup("/Player/char_attack_right5",gp.tileSize*2,gp.tileSize*2);
+            attackRight6 = setup("/Player/char_attack_right6",gp.tileSize*2,gp.tileSize*2);
+        }
+        if(currentWeapon.type == type_axe){
+            attackUp1 = setup("/Player/char_attack_up1",gp.tileSize*2,gp.tileSize*2);
+            attackUp2 = setup("/Player/char_attack_up2",gp.tileSize*2,gp.tileSize*2);
+            attackUp3 = setup("/Player/char_attack_up3",gp.tileSize*2,gp.tileSize*2);
+            attackUp4 = setup("/Player/char_attack_up4",gp.tileSize*2,gp.tileSize*2);
+            attackUp5 = setup("/Player/char_attack_up5",gp.tileSize*2,gp.tileSize*2);
+            attackUp6 = setup("/Player/char_attack_up6",gp.tileSize*2,gp.tileSize*2);
+            attackDown1 = setup("/Player/char_attack_down1",gp.tileSize*2,gp.tileSize*2);
+            attackDown2 = setup("/Player/char_attack_down2",gp.tileSize*2,gp.tileSize*2);
+            attackDown3 = setup("/Player/char_attack_down3",gp.tileSize*2,gp.tileSize*2);
+            attackDown4 = setup("/Player/char_attack_down4",gp.tileSize*2,gp.tileSize*2);
+            attackDown5 = setup("/Player/char_attack_down5",gp.tileSize*2,gp.tileSize*2);
+            attackDown6 = setup("/Player/char_attack_down6",gp.tileSize*2,gp.tileSize*2);
+            attackLeft1 = setup("/Player/char_attack_left1",gp.tileSize*2,gp.tileSize*2);
+            attackLeft2 = setup("/Player/char_attack_left2",gp.tileSize*2,gp.tileSize*2);
+            attackLeft3 = setup("/Player/char_attack_left3",gp.tileSize*2,gp.tileSize*2);
+            attackLeft4 = setup("/Player/char_attack_left4",gp.tileSize*2,gp.tileSize*2);
+            attackLeft5 = setup("/Player/char_attack_left5",gp.tileSize*2,gp.tileSize*2);
+            attackLeft6 = setup("/Player/char_attack_left6",gp.tileSize*2,gp.tileSize*2);
+            attackRight1 = setup("/Player/char_attack_right1",gp.tileSize*2,gp.tileSize*2);
+            attackRight2 = setup("/Player/char_attack_right2",gp.tileSize*2,gp.tileSize*2);
+            attackRight3 = setup("/Player/char_attack_right3",gp.tileSize*2,gp.tileSize*2);
+            attackRight4 = setup("/Player/char_attack_right4",gp.tileSize*2,gp.tileSize*2);
+            attackRight5 = setup("/Player/char_attack_right5",gp.tileSize*2,gp.tileSize*2);
+            attackRight6 = setup("/Player/char_attack_right6",gp.tileSize*2,gp.tileSize*2);
+        }
+        if(currentWeapon.type == type_halberd){
+            attackUp1 = setup("/Player/char_attack_up1",gp.tileSize*2,gp.tileSize*2);
+            attackUp2 = setup("/Player/char_attack_up2",gp.tileSize*2,gp.tileSize*2);
+            attackUp3 = setup("/Player/char_attack_up3",gp.tileSize*2,gp.tileSize*2);
+            attackUp4 = setup("/Player/char_attack_up4",gp.tileSize*2,gp.tileSize*2);
+            attackUp5 = setup("/Player/char_attack_up5",gp.tileSize*2,gp.tileSize*2);
+            attackUp6 = setup("/Player/char_attack_up6",gp.tileSize*2,gp.tileSize*2);
+            attackDown1 = setup("/Player/char_attack_down1",gp.tileSize*2,gp.tileSize*2);
+            attackDown2 = setup("/Player/char_attack_down2",gp.tileSize*2,gp.tileSize*2);
+            attackDown3 = setup("/Player/char_attack_down3",gp.tileSize*2,gp.tileSize*2);
+            attackDown4 = setup("/Player/char_attack_down4",gp.tileSize*2,gp.tileSize*2);
+            attackDown5 = setup("/Player/char_attack_down5",gp.tileSize*2,gp.tileSize*2);
+            attackDown6 = setup("/Player/char_attack_down6",gp.tileSize*2,gp.tileSize*2);
+            attackLeft1 = setup("/Player/char_attack_left1",gp.tileSize*2,gp.tileSize*2);
+            attackLeft2 = setup("/Player/char_attack_left2",gp.tileSize*2,gp.tileSize*2);
+            attackLeft3 = setup("/Player/char_attack_left3",gp.tileSize*2,gp.tileSize*2);
+            attackLeft4 = setup("/Player/char_attack_left4",gp.tileSize*2,gp.tileSize*2);
+            attackLeft5 = setup("/Player/char_attack_left5",gp.tileSize*2,gp.tileSize*2);
+            attackLeft6 = setup("/Player/char_attack_left6",gp.tileSize*2,gp.tileSize*2);
+            attackRight1 = setup("/Player/char_attack_right1",gp.tileSize*2,gp.tileSize*2);
+            attackRight2 = setup("/Player/char_attack_right2",gp.tileSize*2,gp.tileSize*2);
+            attackRight3 = setup("/Player/char_attack_right3",gp.tileSize*2,gp.tileSize*2);
+            attackRight4 = setup("/Player/char_attack_right4",gp.tileSize*2,gp.tileSize*2);
+            attackRight5 = setup("/Player/char_attack_right5",gp.tileSize*2,gp.tileSize*2);
+            attackRight6 = setup("/Player/char_attack_right6",gp.tileSize*2,gp.tileSize*2);
+        }
+        
     }
 
     public void update() {
@@ -308,7 +376,17 @@ public class Player extends Entity {
 
     public void pickUpObject(int i){
         if(i != 999){
-
+            String text;
+            if(inventory.size() != MaxInventorySize){
+                inventory.add(gp.obj[i]);
+                gp.PlaySE(1);
+                text = "Got a "+ gp.obj[i].name + "!";
+            }
+            else{
+                text = "You cannot carry any more";
+            }
+            gp.ui.addMessage(text);
+            gp.obj[i] = null;
         }
     }
 
@@ -335,6 +413,28 @@ public class Player extends Entity {
             gp.PlaySE(8);
             gp.gameState = gp.dialogueState;
             gp.ui.currentDialogue = "You are level "+ level + " now!\n"+"You feel stronger!";
+        }
+    }
+
+    public void SelectItem(){
+        int itemIndex = gp.ui.getItemIndexOnSlot();
+        
+        if(itemIndex < inventory.size()){
+            Entity selectedItem = inventory.get(itemIndex);
+
+            if(selectedItem.type == type_sword || selectedItem.type == type_axe || selectedItem.type == type_halberd){
+                currentWeapon = selectedItem;
+                attack = getAttack();
+                getPlayerAttackImage();
+            }
+            if(selectedItem.type == type_shield){
+                currentShield = selectedItem;
+                defense = getDefense();
+            }
+            if(selectedItem.type == type_consumable){
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
+            }
         }
     }
 
