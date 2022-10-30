@@ -49,6 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter setter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+    Config config = new Config(this);
     Thread gameThread; // a thread is a small set of instructions designed to be scheduled
 
     // Entity and Object
@@ -86,7 +87,9 @@ public class GamePanel extends JPanel implements Runnable {
         tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D)tempScreen.getGraphics();
 
-    //    setFullScreen();
+        if(fullScreenOn == true){
+            setFullScreen();
+        }
     }
 
     public void setFullScreen(){
