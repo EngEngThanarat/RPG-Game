@@ -3,6 +3,8 @@ package Monster;
 import java.util.Random;
 
 import Entity.Entity;
+import Objects.Obj_Coin;
+import Objects.Obj_Heart;
 import main.GamePanel;
 
 public class Slime extends Entity{
@@ -85,5 +87,18 @@ public class Slime extends Entity{
     public void damageReaction(){
         actionLockCounter = 0;
         direction = gp.player.direction;
+    }
+
+    public void checkDrop() {
+        // CAST A DIE
+        int i = new Random().nextInt(100)+1;
+
+        // SET THE MONSTER DROP
+        if(i < 65){
+            dropItem(new Obj_Coin(gp));
+        }
+        if(i >= 65 && i < 100){
+            dropItem(new Obj_Heart(gp));
+        }
     }
 }

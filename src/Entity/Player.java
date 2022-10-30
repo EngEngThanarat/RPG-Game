@@ -40,9 +40,6 @@ public class Player extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        // ATTACK AREA
-
-        
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
@@ -278,6 +275,9 @@ public class Player extends Entity {
                 invincibleCounter = 0;
             }
         }
+        if(life > maxLife){
+            life = maxLife;
+        }
     }
 
     private void contactMonster(int i) {
@@ -291,6 +291,11 @@ public class Player extends Entity {
                 }
                 life -= damage;	
                 invincible = true;
+
+                // IF LIFE LESS THAN 0 LIFE EQUAL 0
+                if(life < 0){
+                    life = 0;
+                }
             }
         }
     }
@@ -376,17 +381,29 @@ public class Player extends Entity {
 
     public void pickUpObject(int i){
         if(i != 999){
-            String text;
-            if(inventory.size() != MaxInventorySize){
-                inventory.add(gp.obj[i]);
-                gp.PlaySE(1);
-                text = "Got a "+ gp.obj[i].name + "!";
+
+            // PICKUP ONLY ITEM
+            if(gp.obj[i].type == type_pickUpOnly){
+                gp.obj[i].use(this);
+                gp.obj[i] = null;
             }
+            // INVENTORY ITEMS
             else{
-                text = "You cannot carry any more";
+                String text;
+
+                if(inventory.size() != MaxInventorySize){
+                    inventory.add(gp.obj[i]);
+                    gp.PlaySE(1);
+                    text = "Got a "+ gp.obj[i].name + "!";
+                }
+                else{
+                    text = "You cannot carry any more";
+                }
+                gp.ui.addMessage(text);
+                gp.obj[i] = null;
             }
-            gp.ui.addMessage(text);
-            gp.obj[i] = null;
+
+            
         }
     }
 

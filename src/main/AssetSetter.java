@@ -3,7 +3,9 @@ package main;
 import Entity.NPC_OldMan;
 import Monster.Slime;
 import Objects.Obj_Axe;
+import Objects.Obj_Coin;
 import Objects.Obj_Halberd;
+import Objects.Obj_Heart;
 import Objects.Obj_Key;
 import Objects.Obj_Potion_Red;
 import Objects.Obj_rock_shield;
@@ -17,9 +19,14 @@ public class AssetSetter {
 
     public void setObject(){
         int i = 0;
-        gp.obj[i] = new Obj_Key(gp);
+        gp.obj[i] = new Obj_Heart(gp);
         gp.obj[i].worldX = gp.tileSize*25;
         gp.obj[i].worldY = gp.tileSize*23;
+        i++;
+
+        gp.obj[i] = new Obj_Coin(gp);
+        gp.obj[i].worldX = gp.tileSize*24;
+        gp.obj[i].worldY = gp.tileSize*18;
         i++;
 
         gp.obj[i] = new Obj_Halberd(gp);

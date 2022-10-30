@@ -317,10 +317,19 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        value = String.valueOf(gp.player.life + "/" + gp.player.maxLife);
-        textX = getXforAlignToRightText(value, tailX);
-        g2.drawString(value, textX, textY);
-        textY += lineHeight;
+        // CHECK LIFE IF LESS THAN 0 SHOW 0
+        if(gp.player.life < 0){
+            value = String.valueOf("0/" + gp.player.maxLife);
+            textX = getXforAlignToRightText(value, tailX);
+            g2.drawString(value, textX, textY);
+            textY += lineHeight;
+        }else{
+            value = String.valueOf(gp.player.life + "/" + gp.player.maxLife);
+            textX = getXforAlignToRightText(value, tailX);
+            g2.drawString(value, textX, textY);
+            textY += lineHeight;
+        }
+        
 
         value = String.valueOf(gp.player.strength);
         textX = getXforAlignToRightText(value, tailX);
