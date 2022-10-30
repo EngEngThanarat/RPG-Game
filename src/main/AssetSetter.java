@@ -6,7 +6,6 @@ import Objects.Obj_Axe;
 import Objects.Obj_Coin;
 import Objects.Obj_Halberd;
 import Objects.Obj_Heart;
-import Objects.Obj_Key;
 import Objects.Obj_Potion_Red;
 import Objects.Obj_rock_shield;
 

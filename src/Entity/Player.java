@@ -21,15 +21,15 @@ public class Player extends Entity {
     public final int screenY;
     public boolean attackCanceled = false;
     public ArrayList<Entity> inventory = new ArrayList<>();
-    public final int MaxInventorySize = 20;
+    public final int MaxInventorySize = 25;
 
     public Player(GamePanel gp, KeyHandler keyH2) {
         super(gp); // recrive gp from entity
 
         this.keyH = keyH2;
 
-        screenX = gp.ScreenWidth / 2 - (gp.tileSize / 2); // 360 pixel
-        screenY = gp.ScreenHigh / 2 - (gp.tileSize / 2); // 264 pixel
+        screenX = gp.screenWidth / 2 - (gp.tileSize / 2); // 360 pixel
+        screenY = gp.screenHeight / 2 - (gp.tileSize / 2); // 264 pixel
 
         // create collision Area 
         solidArea = new Rectangle();
