@@ -42,6 +42,7 @@ public class Entity {
     public boolean alive = true;
     public boolean dying = false;
     public boolean hpBarOn = false;
+    public boolean knockBack = false;
 
     // COUNTER
     public int spriteCounter = 0;

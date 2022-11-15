@@ -10,7 +10,7 @@ public class Obj_Chest extends Entity{
     public Obj_Chest(GamePanel gp){
         super(gp);
 
-        name = "Key";
+        name = "Chest";
         down1= setup("/objects/Box",gp.tileSize,gp.tileSize);
     }
 }

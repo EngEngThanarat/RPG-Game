@@ -45,6 +45,11 @@ public class KeyHandler implements KeyListener{
         else if(gp.gameState == gp.optionState){
             optionState(code);
         }
+
+        // GAME OVER STATE
+        else if(gp.gameState == gp.gameOverState){
+            gameOverState(code);
+        }
     }
 
     public void titleState(int code){
@@ -252,6 +257,34 @@ public class KeyHandler implements KeyListener{
                     gp.se.volumeScale++;
                     gp.PlaySE(9);
                 }
+            }
+        }
+    }
+
+    public void gameOverState(int code){
+        if(code == KeyEvent.VK_W){
+            gp.ui.commardNum--;
+            if(gp.ui.commardNum < 0){
+                gp.ui.commardNum = 1;
+            }
+            gp.PlaySE(9);
+        }
+        if(code == KeyEvent.VK_S){
+            gp.ui.commardNum++;
+            if(gp.ui.commardNum > 1){
+                gp.ui.commardNum = 0;
+            }
+            gp.PlaySE(9);
+        }
+        if(code == KeyEvent.VK_ENTER){
+            if(gp.ui.commardNum == 0){
+                gp.gameState = gp.playState;
+                gp.retry();
+                gp.PlayMusic(0);
+            }
+            else if(gp.ui.commardNum == 1){
+                gp.gameState = gp.titleState;
+                gp.restart();
             }
         }
     }
