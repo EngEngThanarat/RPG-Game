@@ -82,7 +82,7 @@ public class GamePanel extends JPanel implements Runnable {
         setter.setObject();
         setter.setNPC();
         setter.setMonster();
-        //	PlayMusic(0);
+        // PlayMusic();
         gameState = titleState;
 
         tempScreen = new BufferedImage(screenWidth,screenHeight,BufferedImage.TYPE_INT_ARGB);

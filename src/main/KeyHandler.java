@@ -72,7 +72,6 @@ public class KeyHandler implements KeyListener{
                     //gp.ui.titleScreenState = 1;
                     gp.gameState = gp.playState;
                     gp.PlayMusic(0);
-                    gp.PlayMusic(0);
                 }
                 if(gp.ui.commardNum == 1){
                     // add later
