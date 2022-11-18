@@ -49,7 +49,8 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 23; //1104 pixel
         worldY = gp.tileSize * 21; //1104 pixel
-        speed = 4;
+        defaultSpeed = 4;
+        speed = defaultSpeed;
         direction = "down";
 
         // PLAYER STATUS
@@ -317,10 +318,14 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int i){
+    public void damageMonster(int i, int attack, int knockBackPower){
         if(i != 999){
             if(gp.Monster[gp.currentMap][i].invincible == false){
                 gp.PlaySE(5);
+
+                if(knockBackPower > 0){
+                    knockBack(gp.Monster[gp.currentMap][i], knockBackPower);
+                }
 
                 int damage = attack - gp.Monster[gp.currentMap][i].defense;
                 if(damage < 0){
@@ -374,9 +379,9 @@ public class Player extends Entity {
             // attackArea becomes solidArea
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
-            // Check monster co-llistion with the updated
+            // Check monster collistion with the updated
             int monsterIndex = gp.checker.checkEntity(this, gp.Monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack, currentWeapon.knockBackPower);
 
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -434,6 +439,12 @@ public class Player extends Entity {
         }
     }
     
+    public void knockBack(Entity entity, int knockBackPower){
+        entity.direction = direction;
+        entity.speed += knockBackPower;
+        entity.knockBack = true;
+    }
+
     public void checkLevelUp(){
         if(exp >= NextLevel){
             level++;

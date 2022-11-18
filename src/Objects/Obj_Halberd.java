@@ -15,5 +15,6 @@ public class Obj_Halberd extends Entity {
         description = "["+ name + "]\nAn Halberd \nmore attack distance \nthan a sword";
         attackArea.width = 42;
         attackArea.height = 42;
+        knockBackPower = 5;
     }
 }

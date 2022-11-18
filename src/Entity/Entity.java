@@ -50,9 +50,11 @@ public class Entity {
     public int invincibleCounter = 0;
     int dyingCounter = 0;
     int hpBarCounter = 0;
+    int knockBackCounter = 0;
 
     // CHARACTER ATTRIBUTES
     public String name;
+    public int defaultSpeed;
     public int speed;
     public int maxLife;
     public int life;
@@ -72,6 +74,7 @@ public class Entity {
     public int attackValue;
     public int defenseValue;
     public String description = "";
+    public int knockBackPower = 0;
 
     // TYPE
     public int type; // 0 = player, 1 = npc, 2 = monster
@@ -133,44 +136,45 @@ public class Entity {
     }
 
     public void update(){
-        setAction();
 
-        collisionOn = false;
-        gp.checker.checkTile(this);
-        gp.checker.checkObject(this, false);
-        gp.checker.checkEntity(this, gp.npc);
-        gp.checker.checkEntity(this, gp.Monster);
-        boolean contactPlayer = gp.checker.checkPlayer(this);
+        if(knockBack = true){
+            
+            checkCollision();
 
-        if(this.type == type_Monster && contactPlayer == true){
-            if(gp.player.invincible == false){
-                // we can give damage
-                gp.PlaySE(6);
-
-                int damage = attack - gp.player.defense;
-                if(damage < 0){
-                    damage = 0;
-                }
-                gp.player.life -= damage;
-                gp.player.invincible = true;
+            if(collisionOn == true){
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
             }
-        }
+            else if(collisionOn == false){
+                switch(gp.player.direction){
+                case "up": worldY -= speed; break;
+                case "down": worldY += speed; break;
+                case "left": worldX -= speed; break;
+                case "right": worldX += speed; break;
+                }
+            }
 
-        // IF COLLISION IS FALSE, PLAYER CAN MOVE
-        if (collisionOn == false) {
-            switch (direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
+            knockBackCounter++;
+            if(knockBackCounter == 10){
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+
+        }else{
+            setAction();
+            checkCollision();
+
+            // IF COLLISION IS FALSE, PLAYER CAN MOVE
+            if (collisionOn == false) {
+                
+                switch (direction) {
+                case "up": worldY -= speed; break;
+                case "down": worldY += speed; break;
+                case "left": worldX -= speed; break;
+                case "right": worldX += speed; break;
+                }
             }
         }
 
@@ -197,6 +201,29 @@ public class Entity {
             if(invincibleCounter > 40){
                 invincible = false;
                 invincibleCounter = 0;
+            }
+        }
+    }
+
+    public void checkCollision(){
+        collisionOn = false;
+        gp.checker.checkTile(this);
+        gp.checker.checkObject(this, false);
+        gp.checker.checkEntity(this, gp.npc);
+        gp.checker.checkEntity(this, gp.Monster);
+        boolean contactPlayer = gp.checker.checkPlayer(this);
+
+        if(this.type == type_Monster && contactPlayer == true){
+            if(gp.player.invincible == false){
+                // we can give damage
+                gp.PlaySE(6);
+
+                int damage = attack - gp.player.defense;
+                if(damage < 0){
+                    damage = 0;
+                }
+                gp.player.life -= damage;
+                gp.player.invincible = true;
             }
         }
     }

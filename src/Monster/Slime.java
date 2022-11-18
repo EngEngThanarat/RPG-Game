@@ -18,7 +18,8 @@ public class Slime extends Entity{
 
         type = type_Monster;
         name = "Slime";
-        speed = 1;
+        defaultSpeed = 1;
+        speed = defaultSpeed;
         maxLife = 4;
         life = maxLife;
         attack = 5;
