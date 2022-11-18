@@ -123,10 +123,10 @@ public class Entity {
 
     public void dropItem(Entity droppedItem){
         for(int i = 0; i < gp.obj.length; i++){
-            if(gp.obj[i] == null){
-                gp.obj[i] = droppedItem;
-                gp.obj[i].worldX = worldX; // the dead Monster worldX
-                gp.obj[i].worldY = worldY; // the dead Monster worldY
+            if(gp.obj[gp.currentMap][i] == null){
+                gp.obj[gp.currentMap][i] = droppedItem;
+                gp.obj[gp.currentMap][i].worldX = worldX; // the dead Monster worldX
+                gp.obj[gp.currentMap][i].worldY = worldY; // the dead Monster worldY
                 break;
             }
         }

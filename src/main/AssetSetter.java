@@ -17,42 +17,47 @@ public class AssetSetter {
     }
 
     public void setObject(){
+
+        int mapNum = 0;
         int i = 0;
-        gp.obj[i] = new Obj_Heart(gp);
-        gp.obj[i].worldX = gp.tileSize*25;
-        gp.obj[i].worldY = gp.tileSize*23;
+        gp.obj[mapNum][i] = new Obj_Heart(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*25;
+        gp.obj[mapNum][i].worldY = gp.tileSize*23;
         i++;
 
-        gp.obj[i] = new Obj_Coin(gp);
-        gp.obj[i].worldX = gp.tileSize*24;
-        gp.obj[i].worldY = gp.tileSize*18;
+        gp.obj[mapNum][i] = new Obj_Coin(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*24;
+        gp.obj[mapNum][i].worldY = gp.tileSize*18;
         i++;
 
-        gp.obj[i] = new Obj_Halberd(gp);
-        gp.obj[i].worldX = gp.tileSize*38;
-        gp.obj[i].worldY = gp.tileSize*10;
+        gp.obj[mapNum][i] = new Obj_Halberd(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*38;
+        gp.obj[mapNum][i].worldY = gp.tileSize*10;
         i++;
 
-        gp.obj[i] = new Obj_Axe(gp);
-        gp.obj[i].worldX = gp.tileSize*36;
-        gp.obj[i].worldY = gp.tileSize*40;
+        gp.obj[mapNum][i] = new Obj_Axe(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*36;
+        gp.obj[mapNum][i].worldY = gp.tileSize*40;
         i++;
 
-        gp.obj[i] = new Obj_rock_shield(gp);
-        gp.obj[i].worldX = gp.tileSize*36;
-        gp.obj[i].worldY = gp.tileSize*21;
+        gp.obj[mapNum][i] = new Obj_rock_shield(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*36;
+        gp.obj[mapNum][i].worldY = gp.tileSize*21;
         i++;
 
-        gp.obj[i] = new Obj_Potion_Red(gp);
-        gp.obj[i].worldX = gp.tileSize*22;
-        gp.obj[i].worldY = gp.tileSize*27;
+        gp.obj[mapNum][i] = new Obj_Potion_Red(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*22;
+        gp.obj[mapNum][i].worldY = gp.tileSize*27;
         i++;
     }
 
     public void setNPC(){
-        gp.npc[0] = new NPC_OldMan(gp);
-        gp.npc[0].worldX = gp.tileSize*21;
-        gp.npc[0].worldY = gp.tileSize*21;
+        int mapNum = 0;
+        int i = 0;
+        gp.npc[mapNum][i] = new NPC_OldMan(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize*21;
+        gp.npc[mapNum][i].worldY = gp.tileSize*21;
+        i++;
 
         //gp.npc[0] = new NPC_OldMan(gp);
         //gp.npc[0].worldX = gp.tileSize*9;
@@ -60,20 +65,21 @@ public class AssetSetter {
     }
 
     public void setMonster(){
+        int mapNum = 0;
         int i = 0;
-        gp.Monster[i] = new Slime(gp);
-        gp.Monster[i].worldX = gp.tileSize*23;
-        gp.Monster[i].worldY = gp.tileSize*36;
+        gp.Monster[mapNum][i] = new Slime(gp);
+        gp.Monster[mapNum][i].worldX = gp.tileSize*23;
+        gp.Monster[mapNum][i].worldY = gp.tileSize*36;
         i++;
 
-        gp.Monster[i] = new Slime(gp);
-        gp.Monster[i].worldX = gp.tileSize*22;
-        gp.Monster[i].worldY = gp.tileSize*37;
+        gp.Monster[mapNum][i] = new Slime(gp);
+        gp.Monster[mapNum][i].worldX = gp.tileSize*22;
+        gp.Monster[mapNum][i].worldY = gp.tileSize*37;
         i++;
 
-        gp.Monster[i] = new Slime(gp);
-        gp.Monster[i].worldX = gp.tileSize*25;
-        gp.Monster[i].worldY = gp.tileSize*19;
+        gp.Monster[mapNum][i] = new Slime(gp);
+        gp.Monster[mapNum][i].worldX = gp.tileSize*25;
+        gp.Monster[mapNum][i].worldY = gp.tileSize*19;
         i++;
     }
 }
