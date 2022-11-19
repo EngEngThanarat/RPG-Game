@@ -1,7 +1,6 @@
 package Entity;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import Objects.Obj_Key;
 import Objects.Obj_Shield_Wood;
@@ -20,8 +19,6 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public boolean attackCanceled = false;
-    public ArrayList<Entity> inventory = new ArrayList<>();
-    public final int MaxInventorySize = 25;
 
     public Player(GamePanel gp, KeyHandler keyH2) {
         super(gp); // recrive gp from entity
@@ -49,6 +46,9 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = gp.tileSize * 23; //1104 pixel
         worldY = gp.tileSize * 21; //1104 pixel
+        worldX = gp.tileSize * 12;
+        worldY = gp.tileSize * 12;
+        gp.currentMap = 1;
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";
@@ -61,7 +61,7 @@ public class Player extends Entity {
         dexterity = 1; // The more dexterity he has, the less damage he receives
         exp = 0;
         NextLevel = 5;
-        coin = 0;
+        coin = 250;
         currentWeapon = new Obj_Sword_Normal(gp);
         currentShield = new Obj_Shield_Wood(gp);
         attack = getAttack(); // The total attack value is decided by strength and weapon
@@ -462,7 +462,8 @@ public class Player extends Entity {
     }
 
     public void SelectItem(){
-        int itemIndex = gp.ui.getItemIndexOnSlot();
+        
+        int itemIndex = gp.ui.getItemIndexOnSlot(gp.ui.PlayerSlotCol,gp.ui.PlayerSlotRow);
         
         if(itemIndex < inventory.size()){
             Entity selectedItem = inventory.get(itemIndex);

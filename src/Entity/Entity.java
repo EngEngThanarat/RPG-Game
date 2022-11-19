@@ -2,6 +2,7 @@ package Entity;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.Graphics2D;
 import javax.imageio.ImageIO;
 import java.awt.AlphaComposite;
@@ -70,11 +71,14 @@ public class Entity {
     public Entity currentShield;
 
     // ITEM ATTRIBUTE
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int MaxInventorySize = 25;
     public int value;
     public int attackValue;
     public int defenseValue;
     public String description = "";
     public int knockBackPower = 0;
+    public int price = 0;
 
     // TYPE
     public int type; // 0 = player, 1 = npc, 2 = monster

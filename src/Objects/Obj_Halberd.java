@@ -16,5 +16,6 @@ public class Obj_Halberd extends Entity {
         attackArea.width = 42;
         attackArea.height = 42;
         knockBackPower = 5;
+        price = 100;
     }
 }

@@ -13,5 +13,6 @@ public class Obj_rock_shield extends Entity {
         down1 = setup("/Objects/rock_shield", gp.tileSize, gp.tileSize);
         defenseValue = 2;
         description = "["+ name + "]\nAn Rock Shield";
+        price = 75;
     }
 }
