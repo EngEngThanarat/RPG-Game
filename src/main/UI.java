@@ -456,8 +456,8 @@ public class UI {
 
         // CURSOR
         if(cursor == true){
-            int cursorX = slotXstart + (slotSize * PlayerSlotCol);
-            int cursorY = slotYstart + (slotSize * PlayerSlotRow);
+            int cursorX = slotXstart + (slotSize * slotCol);
+            int cursorY = slotYstart + (slotSize * slotRow);
             int cursorWidth = gp.tileSize;
             int cursorHeight = gp.tileSize;
     
