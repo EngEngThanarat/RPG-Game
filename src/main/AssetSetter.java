@@ -32,8 +32,8 @@ public class AssetSetter {
         i++;
 
         gp.obj[mapNum][i] = new Obj_Halberd(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*38;
-        gp.obj[mapNum][i].worldY = gp.tileSize*10;
+        gp.obj[mapNum][i].worldX = gp.tileSize*33;
+        gp.obj[mapNum][i].worldY = gp.tileSize*7;
         i++;
 
         gp.obj[mapNum][i] = new Obj_Axe(gp);

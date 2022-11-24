@@ -7,6 +7,7 @@ import java.util.Comparator;
 
 import javax.swing.JPanel;
 
+import AI.PathFinding;
 import Entity.Entity;
 import Entity.Player;
 import Tiles.TileManager;
@@ -43,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
 
     // System
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
     public KeyHandler keyH = new KeyHandler(this);
     sound music = new sound();
     sound se = new sound();
@@ -52,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
     Config config = new Config(this);
+    public PathFinding PFinding = new PathFinding(this);
     Thread gameThread; // a thread is a small set of instructions designed to be scheduled
 
     // Entity and Object
