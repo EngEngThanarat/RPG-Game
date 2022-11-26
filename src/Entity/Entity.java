@@ -92,9 +92,34 @@ public class Entity {
     public final int type_shield = 6;
     public final int type_consumable = 7;
     public final int type_pickUpOnly = 8;
+    public final int type_obstacle = 9;
 
     public Entity(GamePanel gp){
         this.gp = gp;
+    }
+
+    public int getLeftX(){
+        return worldX + solidArea.x;
+    }
+
+    public int getRightX(){
+        return worldX + solidArea.x + solidArea.width;
+    }
+
+    public int getTopY(){
+        return worldY + solidArea.y;
+    }
+
+    public int getButtomY(){
+        return worldY + solidArea.y + solidArea.height;
+    }
+
+    public int getCol(){
+        return (worldX + solidArea.x)/gp.tileSize;
+    }
+
+    public int getRow(){
+        return (worldY + solidArea.y)/gp.tileSize;
     }
 
     public void setAction(){}
@@ -125,7 +150,13 @@ public class Entity {
         }
     }
 
-    public void use(Entity entity){}
+    public void interact(){
+        
+    }
+
+    public boolean use(Entity entity){
+        return false;
+    }
 
     public void checkDrop(){}
 
@@ -301,7 +332,14 @@ public class Entity {
             g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
             
             changeAlpha(g2, 1f);
+            
         }
+        
+        // SOLID AREA
+        // int solidtempX = screenX + solidArea.x;
+        // int solidtempY = screenY + solidArea.y;
+        // g2.setColor(Color.white);
+        // g2.fillRect(solidtempX, solidtempY, solidArea.width, solidArea.height);
     }
 
     public void dyingAnimation(Graphics2D g2){
@@ -372,8 +410,9 @@ public class Entity {
             int enRightX = worldX + solidArea.x + solidArea.width;
             int enTopY = worldY + solidArea.y;
             int enBottomY = worldY + solidArea.y + solidArea.height;
+            // SOLID AREA
 
-            if(enTopY > nextX && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
+            if(enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
                 direction = "up";
             }
             else if(enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gp.tileSize){
@@ -392,7 +431,7 @@ public class Entity {
                 // up or left
                 direction = "up";
                 checkCollision();
-                if(collision == true){
+                if(collisionOn == true){
                     direction = "left";
                 }
             }
@@ -400,7 +439,7 @@ public class Entity {
                 // up or right
                 direction = "up";
                 checkCollision();
-                if(collision == true){
+                if(collisionOn == true){
                     direction = "right";
                 }
             }
@@ -408,7 +447,7 @@ public class Entity {
                 // down or left
                 direction = "down";
                 checkCollision();
-                if(collision == true){
+                if(collisionOn == true){
                     direction = "left";
                 }
             }
@@ -416,7 +455,7 @@ public class Entity {
                 // down or right
                 direction = "down";
                 checkCollision();
-                if(collision == true){
+                if(collisionOn == true){
                     direction = "right";
                 }
             }
@@ -428,5 +467,37 @@ public class Entity {
 //                onPath = false;
 //            } 
         }
+    }
+
+    public int getDetected(Entity user, Entity target[][], String targetName){
+
+        int index = 999;
+
+        // Check the surrounding object
+        int nextWorldX = user.getLeftX();
+        int nextWorldY = user.getTopY();
+
+        switch(user.direction){
+            case "up": nextWorldY = user.getTopY()-1; break;
+            case "down": nextWorldY = user.getButtomY()+1; break;
+            case "left": nextWorldX = user.getLeftX()-1; break;
+            case "right": nextWorldX = user.getRightX()+1; break;
+        }
+
+        int col = nextWorldX/gp.tileSize;
+        int row = nextWorldY/gp.tileSize;
+
+        for(int i = 0; i < target[1].length; i++){
+            if(target[gp.currentMap][i] != null){
+                if(target[gp.currentMap][i].getCol() == col &&
+                    target[gp.currentMap][i].getRow() == row && 
+                    target[gp.currentMap][i].name.equals(targetName)){
+                       
+                        index = i;
+                        break;
+                    }
+            }
+        }
+        return index;
     }
 }

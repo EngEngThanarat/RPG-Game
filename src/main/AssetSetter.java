@@ -3,12 +3,10 @@ package main;
 import Entity.NPC_Merchant;
 import Entity.NPC_OldMan;
 import Monster.Slime;
-import Objects.Obj_Axe;
-import Objects.Obj_Coin;
-import Objects.Obj_Halberd;
-import Objects.Obj_Heart;
-import Objects.Obj_Potion_Red;
-import Objects.Obj_rock_shield;
+import Objects.Obj_Chest;
+import Objects.Obj_Door;
+import Objects.Obj_Key;
+
 
 public class AssetSetter {
     GamePanel gp;
@@ -21,34 +19,24 @@ public class AssetSetter {
 
         int mapNum = 0;
         int i = 0;
-        gp.obj[mapNum][i] = new Obj_Heart(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*25;
-        gp.obj[mapNum][i].worldY = gp.tileSize*23;
-        i++;
-
-        gp.obj[mapNum][i] = new Obj_Coin(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*24;
-        gp.obj[mapNum][i].worldY = gp.tileSize*18;
-        i++;
-
-        gp.obj[mapNum][i] = new Obj_Halberd(gp);
+        gp.obj[mapNum][i] = new Obj_Door(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize*33;
         gp.obj[mapNum][i].worldY = gp.tileSize*7;
         i++;
 
-        gp.obj[mapNum][i] = new Obj_Axe(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*36;
-        gp.obj[mapNum][i].worldY = gp.tileSize*40;
+        gp.obj[mapNum][i] = new Obj_Door(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*14;
+        gp.obj[mapNum][i].worldY = gp.tileSize*28;
         i++;
 
-        gp.obj[mapNum][i] = new Obj_rock_shield(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*36;
-        gp.obj[mapNum][i].worldY = gp.tileSize*21;
+        gp.obj[mapNum][i] = new Obj_Door(gp);
+        gp.obj[mapNum][i].worldX = gp.tileSize*10;
+        gp.obj[mapNum][i].worldY = gp.tileSize*12;
         i++;
 
-        gp.obj[mapNum][i] = new Obj_Potion_Red(gp);
-        gp.obj[mapNum][i].worldX = gp.tileSize*22;
-        gp.obj[mapNum][i].worldY = gp.tileSize*27;
+        gp.obj[mapNum][i] = new Obj_Chest(gp,new Obj_Key(gp));
+        gp.obj[mapNum][i].worldX = gp.tileSize*34;
+        gp.obj[mapNum][i].worldY = gp.tileSize*36;
         i++;
     }
 

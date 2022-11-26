@@ -20,9 +20,10 @@ public class Obj_Heart extends Entity {
         image3 = setup("/Objects/heart_null",gp.tileSize,gp.tileSize);
     }
     
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gp.PlaySE(2);
         gp.ui.addMessage("Life + "+value);
         entity.life += value;
+        return true;
     }
 }

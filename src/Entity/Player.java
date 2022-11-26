@@ -3,6 +3,7 @@ package Entity;
 import java.awt.image.BufferedImage;
 
 import Objects.Obj_Key;
+import Objects.Obj_Potion_Red;
 import Objects.Obj_Shield_Wood;
 import Objects.Obj_Sword_Normal;
 
@@ -82,6 +83,27 @@ public class Player extends Entity {
         inventory.add(currentShield);
         inventory.add(new Obj_Key(gp));
         inventory.add(new Obj_Key(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
+        inventory.add(new Obj_Potion_Red(gp));
     }
 
     public int getAttack(){
@@ -406,6 +428,13 @@ public class Player extends Entity {
                 gp.obj[gp.currentMap][i].use(this);
                 gp.obj[gp.currentMap][i] = null;
             }
+            // OBSTACLE
+            else if(gp.obj[gp.currentMap][i].type == type_obstacle){
+                if(keyH.enterPressed == true){
+                    attackCanceled = true;
+                    gp.obj[gp.currentMap][i].interact();
+                }
+            }
             // INVENTORY ITEMS
             else{
                 String text;
@@ -475,8 +504,9 @@ public class Player extends Entity {
                 defense = getDefense();
             }
             if(selectedItem.type == type_consumable){
-                selectedItem.use(this);
-                inventory.remove(itemIndex);
+                if(selectedItem.use(this) == true){
+                    inventory.remove(itemIndex);
+                }
             }
         }
     }
