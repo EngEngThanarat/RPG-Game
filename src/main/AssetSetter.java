@@ -5,6 +5,7 @@ import Entity.NPC_OldMan;
 import Monster.Slime;
 import Objects.Obj_Chest;
 import Objects.Obj_Door;
+import Objects.Obj_Halberd;
 import Objects.Obj_Key;
 
 
@@ -30,7 +31,8 @@ public class AssetSetter {
         gp.obj[mapNum][i].worldY = gp.tileSize*12;
         i++;
 
-        gp.obj[mapNum][i] = new Obj_Chest(gp,new Obj_Key(gp));
+        gp.obj[mapNum][i] = new Obj_Chest(gp);
+        gp.obj[mapNum][i].setLoot(new Obj_Halberd(gp));
         gp.obj[mapNum][i].worldX = gp.tileSize*34;
         gp.obj[mapNum][i].worldY = gp.tileSize*36;
         i++;

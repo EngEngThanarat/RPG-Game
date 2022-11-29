@@ -39,9 +39,6 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
-        getPlayerImage();
-        getPlayerAttackImage();
-        setItem();
     }
 
     public void setDefaultValues() {
@@ -64,6 +61,10 @@ public class Player extends Entity {
         currentShield = new Obj_Shield_Wood(gp);
         attack = getAttack(); // The total attack value is decided by strength and weapon
         defense = getDefense(); // The total defense value is decided by dexteritery and shield
+
+        getPlayerImage();
+        getPlayerAttackImage();
+        setItem();
     }
 
     public void setDefaultPosition(){
@@ -72,9 +73,11 @@ public class Player extends Entity {
         direction = "down";
     }
 
-    public void RestoreLife(){
+    public void RestoreStatus(){
         life = maxLife;
         invincible = false;
+        attacking = false;
+        knockBack = false;
     }
 
     public void setItem(){
@@ -82,27 +85,6 @@ public class Player extends Entity {
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new Obj_Key(gp));
-        inventory.add(new Obj_Key(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
-        inventory.add(new Obj_Potion_Red(gp));
         inventory.add(new Obj_Potion_Red(gp));
     }
 
@@ -113,6 +95,26 @@ public class Player extends Entity {
 
     public int getDefense(){
         return defense = dexterity * currentShield.defenseValue;
+    }
+
+    public int getCurrentWeaponSlot(){
+        int currentWeaponSlot = 0;
+        for(int i = 0; i < inventory.size(); i++){
+            if(inventory.get(i) == currentWeapon){
+                currentWeaponSlot = i;
+            }
+        }
+        return currentWeaponSlot;
+    }
+
+    public int getCurrentShieldSlot(){
+        int currentShieldSlot = 0;
+        for(int i = 0; i < inventory.size(); i++){
+            if(inventory.get(i) == currentShield){
+                currentShieldSlot = i;
+            }
+        }
+        return currentShieldSlot;
     }
 
     public void getPlayerImage() {

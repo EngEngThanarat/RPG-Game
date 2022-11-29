@@ -10,7 +10,7 @@ public class Obj_boots extends Entity{
     public Obj_boots(GamePanel gp){
         super(gp);
 
-        name = "Key";
+        name = "boot";
         down1= setup("/objects/speed.png",gp.tileSize,gp.tileSize);
     }
 }

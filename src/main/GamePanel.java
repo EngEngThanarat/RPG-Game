@@ -11,6 +11,8 @@ import AI.PathFinding;
 import Entity.Entity;
 import Entity.Player;
 import Tiles.TileManager;
+import data.SaveLoad;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -54,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     public EventHandler eHandler = new EventHandler(this);
     Config config = new Config(this);
     public PathFinding PFinding = new PathFinding(this);
+    SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread; // a thread is a small set of instructions designed to be scheduled
 
     // Entity and Object
@@ -99,19 +102,16 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void retry(){
+    public void resetGame(boolean restart){
         player.setDefaultPosition();
-        player.RestoreLife();
+        player.RestoreStatus();
         setter.setNPC();
         setter.setMonster();
-    }
 
-    public void restart(){
-        player.setDefaultValues();
-        player.setItem();
-        setter.setObject();
-        setter.setNPC();
-        setter.setMonster();
+        if(restart == true){
+            player.setDefaultValues();
+            setter.setObject();
+        }
     }
 
     public void setFullScreen(){

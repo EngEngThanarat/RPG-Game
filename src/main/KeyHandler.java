@@ -79,7 +79,9 @@ public class KeyHandler implements KeyListener{
                     gp.PlayMusic(0);
                 }
                 if(gp.ui.commardNum == 1){
-                    // add later
+                    gp.saveLoad.Load();
+                    gp.gameState = gp.playState;
+                    gp.PlayMusic(0);
                 }
                 if(gp.ui.commardNum == 2){
                     System.exit(0);
@@ -263,12 +265,12 @@ public class KeyHandler implements KeyListener{
         if(code == KeyEvent.VK_ENTER){
             if(gp.ui.commardNum == 0){
                 gp.gameState = gp.playState;
-                gp.retry();
+                gp.resetGame(false);
                 gp.PlayMusic(0);
             }
             else if(gp.ui.commardNum == 1){
                 gp.gameState = gp.titleState;
-                gp.restart();
+                gp.resetGame(true);
             }
         }
     }
