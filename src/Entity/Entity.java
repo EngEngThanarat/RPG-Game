@@ -80,6 +80,8 @@ public class Entity {
     public String description = "";
     public int knockBackPower = 0;
     public int price = 0;
+    public boolean stackable = false;
+    public int amout = 1;
 
     // TYPE
     public int type; // 0 = player, 1 = npc, 2 = monster

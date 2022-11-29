@@ -439,8 +439,7 @@ public class Player extends Entity {
             else{
                 String text;
 
-                if(inventory.size() != MaxInventorySize){
-                    inventory.add(gp.obj[gp.currentMap][i]);
+                if(canObtainItem(gp.obj[gp.currentMap][i]) == true){
                     gp.PlaySE(1);
                     text = "Got a "+ gp.obj[gp.currentMap][i].name + "!";
                 }
@@ -505,7 +504,12 @@ public class Player extends Entity {
             }
             if(selectedItem.type == type_consumable){
                 if(selectedItem.use(this) == true){
-                    inventory.remove(itemIndex);
+                    if(selectedItem.amout > 1){
+                        selectedItem.amout--;
+                    }
+                    else{
+                        inventory.remove(itemIndex);
+                    }
                 }
             }
         }
@@ -630,5 +634,48 @@ public class Player extends Entity {
         // g2.setFont(new Font("Arial",Font.PLAIN, 26));
         // g2.setColor(Color.white);
         // g2.drawString("invincible:"+invincibleCounter, 10, 400);
+    }
+
+    public int searchItemInventory(String itemName){
+
+        int itemIndex = 999;
+
+        for(int i = 0; i < inventory.size(); i++){
+            if(inventory.get(i).name.equals(itemName)){
+                itemIndex = i;
+                break;
+            }
+        }
+        return itemIndex;
+    }
+
+    public boolean canObtainItem(Entity item){
+
+        boolean canObtain = false;
+
+        // CHECK IF STACKABLE
+        if(item.stackable == true){
+            int index = searchItemInventory(item.name);
+
+            if(index != 999){
+                inventory.get(index).amout++;
+                canObtain = true;
+            }
+            else {
+                // new item so need to check vacancy
+                if(inventory.size() != MaxInventorySize){
+                    inventory.add(item);
+                    canObtain = true;
+                }
+            }
+        }
+        else{ 
+            // NOT STACKABLE SO CHECK VACANCY
+            if(inventory.size() != MaxInventorySize){
+                inventory.add(item);
+                canObtain = true;
+            }
+        }
+        return canObtain;
     }
 }
